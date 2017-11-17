@@ -10,6 +10,13 @@ public class Conexion {
     private String password="123456";
     private String url="";
  
+    /**
+     * Metodo para conectar a la base de datos
+     * @param servidor el servidor
+     * @param database
+     * @param usuario
+     * @param password
+     */
     public  Conexion(String servidor, String database, String usuario, String password){
         try {
  
@@ -32,12 +39,14 @@ public class Conexion {
             System.out.println(ex);
         }
     }
-/*
-    $db = new PDO('mysql:host=mysql.hostinger.es;
-    dbname=u222872483_ino;
-    charset=utf8mb4', 'u222872483_ino', '123456');
     
-    */
+    /**
+     * Metodo para conectar a la base de datos
+     * @param servidor el servidor
+     * @param database
+     * @param usuario
+     * @param password
+     */
     public Conexion(){
         try {
  
