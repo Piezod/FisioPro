@@ -41,6 +41,7 @@ public class SvInicio extends HttpServlet {
 			if (request.getParameter("operacion").equalsIgnoreCase("login"))
 					{
 						login(request.getParameter("usuario"),request.getParameter("pass"),request,response);
+						
 					}
 			else if (request.getParameter("operacion").equalsIgnoreCase("recordar"))
 			{
@@ -61,7 +62,8 @@ public class SvInicio extends HttpServlet {
 			if (lg.comprobarlogin(usuario, pass))
 					{
 				request.setAttribute("usuario", user);
-				request.getRequestDispatcher("WEB-INF/inicio.jsp").forward(request,response);
+				//request.getRequestDispatcher("WEB-INF/inicio.jsp").forward(request,response);
+				response.sendRedirect("inicio.jsp");
 					}
 			else
 			{		

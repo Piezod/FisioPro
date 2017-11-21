@@ -4,12 +4,20 @@ import java.sql.*;
 public class Conexion {
 
 	private Connection conexion=null;
-    private String servidor="sql139.main-hosting.eu";
+   
+	/*Conexion a hostinger funcionando.
+	 * private String servidor="sql139.main-hosting.eu";
     private String database="u222872483_java";
     private String usuario="u222872483_java";
     private String password="123456";
-    private String url="";
+    private String url="";*/
  
+    
+    private String servidor="localhost";
+    private String database="u222872483_java";
+    private String usuario="root";
+    private String password="123456";
+    private String url="";
     /**
      * Metodo para conectar a la base de datos
      * @param servidor el servidor
@@ -75,7 +83,8 @@ public class Conexion {
  
     public Statement getstm() throws SQLException
     {
-    	return conexion.createStatement();
+    	Statement stm=conexion.createStatement();
+    	return stm;
     }
     public Connection cerrarConexion(){
         try {

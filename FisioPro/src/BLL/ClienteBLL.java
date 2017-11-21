@@ -1,4 +1,8 @@
 package BLL;
+
+
+import java.sql.SQLException;
+
 import javax.swing.plaf.synth.SynthScrollBarUI;
 
 import BD.*;
@@ -14,45 +18,37 @@ public class ClienteBLL {
 	
 	public ClienteBLL(String nombre,String ape1,String ape2,String edad,String telefono) throws Exception {
 		// TODO Auto-generated method stub
-
 		cli=new Cliente();
-		if (validardatoscliente(nombre, ape1, ape2, edad, telefono))
-		{
 		cli.setNombre(nombre);
 		cli.setApellido1(ape1);
 		cli.setApellido2(ape2);
 		cli.setEdad(edad);
 		cli.setTelefono(telefono);
-		}
-		else
-		{
-			throw new Exception ("error campos no validos para el cliente"					) {
-				
-					};
-		}
 	}
 	
 	/**
 	 * 
-	 * Metodo que nos realizara el alta, validaciones, llamada a dal.
-	 * @return si se ha producido el alta o no
+	 * Metodo que nos realizara el alta, validaciones, llamada a dal y nos devuelve el id
+	 * del cliente dado de alta.
+	 * @return devuelve el id del cliente dado de alta, en caso de error devuelve un 0
 	 */
-	public boolean altacliente()
+	public int altacliente()
 	{
 		
-		boolean fin=true;
+		int exito=0;;
 		try {
-			
 				ClienteDAL cdal=new ClienteDAL(cli);
-				if (cdal.AltaCliente()==0)
-					fin=false;
+				if (cdal.AltaCliente()>0)
+				{					
+					exito=cdal.obtenerultimoid();	
+				}
 		} catch (Exception e) {
 			// TODO: handle exception
-			fin=false;
-			System.err.println("Error en cliente.bll alta cliente");
+			exito=0;
+			System.err.println("Error en cliente.bll alta cliente" + e);
 		}
 		
-		return fin;
+		return exito;
 	}
 
 	/**

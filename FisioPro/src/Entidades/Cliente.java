@@ -7,6 +7,7 @@ public class Cliente {
 	private String Apellido2;
 	private int Edad;
 	private int Telefono;
+	private int oid;
 
 	public String getNombre() {
 		return nombre;
@@ -43,6 +44,12 @@ public class Cliente {
 	public String toString() {
 		return "Cliente [nombre=" + nombre + ", Apellido1=" + Apellido1 + ", Apellido2=" + Apellido2 + ", Edad=" + Edad
 				+ ", Telefono=" + Telefono + "]";
+	}
+	public int getOid() {
+		return oid;
+	}
+	public void setOid(int oid) {
+		this.oid = oid;
 	}
  
 	

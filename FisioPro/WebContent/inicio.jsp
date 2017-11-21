@@ -4,11 +4,21 @@
 
 
 <html lang="en">
+
+<%@ include file="/WEB-INF/Cabecera.jsp" %>
 <head>
+<script >
+$(document).ready(function(){
+    console.log( "ready!" );
+    $('#modalexito').modal('show');    
+});
+</script>
+
 </head>
 <body>
-<%@ include file="/WEB-INF/Cabecera.jsp" %>
-
+<c:if test="${exito > 0 }">
+<%@ include file="/WEB-INF/Modales/modalexito.jsp" %>
+</c:if>
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -16,10 +26,10 @@
       <li data-target="#myCarousel" data-slide-to="1"></li>
     </ol>
 
-    <!-- Wrapper for slides -->
+    <!-- Wrapper for slides imagenes tamaño 1200 x 400 -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-        <img src="https://placehold.it/1200x400?text=IMAGE" alt="Image">
+        <img src="IMAGENES/manodoctorslider.jpg"alt="Image"/>
         <div class="carousel-caption">
           <h3>Sell $</h3>
           <p>Money Money.</p>
@@ -27,10 +37,10 @@
       </div>
 
       <div class="item">
-        <img src="https://placehold.it/1200x400?text=Another Image Maybe" alt="Image">
+        <img src="IMAGENES/manodoctorslider.jpg"/>
         <div class="carousel-caption">
-          <h3>More Sell $</h3>
-          <p>Lorem ipsum...</p>
+          <h3>Profesionales</h3>
+          <p>Que se preocupan por tu bien estar</p>
         </div>      
       </div>
     </div>
@@ -47,11 +57,12 @@
 </div>
 
 <div class="container text-center">    
+
   <h3>What We Do</h3><br>
   <div class="row">
     <div class="col-sm-4">
     <!-- Imagenes 150x80 -->
-      <img src="/IMAGENES/manodoctor.jpg" class="img-responsive" style="width:100%" alt="Image">
+      <img src="" class="img-responsive" style="width:100%" alt="Image">
       <p>Current Project</p>
     </div>
     <div class="col-sm-4"> 
@@ -70,7 +81,7 @@
 </div><br>
 
 <footer class="container-fluid text-center">
-  <p>Footer Text</p>
+  <p>FisioPro Aplicación realizada por JuanKar 2017 </p>
 </footer>
 </body>
 </html>

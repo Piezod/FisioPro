@@ -1,12 +1,15 @@
 package Sv;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import BLL.AntecedentesPersonalesBLL;
 import BLL.ClienteBLL;
 import Entidades.Cliente;
 
@@ -39,47 +42,76 @@ public class SvCliente extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {
-			if (request.getParameter("operacion").equalsIgnoreCase("alta"))
+			if (request.getParameter("oper").equalsIgnoreCase("alta"))
 			{
+				ClienteBLL cli=new ClienteBLL(request.getParameter("nombre")
+						,request.getParameter("apellido1")
+						,request.getParameter("apellido2")
+						,request.getParameter("edad")
+						,request.getParameter("telefono"));
+				int idcliente=crearcliente(cli);
+						
+				/*
+				 *  Si tenemos id cliente se ha producido el alta y pasamos al formulario de 
+				 *  antecedentes personales
+				 */
+				if (idcliente>0)
+				{
+					request.setAttribute("idcliente",idcliente);
+					request.getRequestDispatcher("WEB-INF/AntecedentesPersonales.jsp").forward(request,response);
+				}
+				else
+				{
+					throw new Exception("excepcion mia, no se dio de alta el cliente");
+				}
 				
-				System.out.println("Voy a alta cliente");
-				crearcliente(request);
-				request.setAttribute("datos", "pantalla de alta usuario");
-				request.getRequestDispatcher("WEB-INF/AltaCliente.jsp").forward(request,response);
 			}
-			else if (request.getParameter("operacion").equalsIgnoreCase("baja"))
+			else if (request.getParameter("oper").equalsIgnoreCase("baja"))
 			{
 				System.out.println("Voy a alta baja cliente.jsp");
 			}
-			else if (request.getParameter("operacion").equalsIgnoreCase("modificacion"))
+			else if (request.getParameter("oper").equalsIgnoreCase("modificacion"))
 			
 			{
 				System.out.println("Voy a alta modificacion cliente.jsp");
+			}else if (request.getParameter("oper").equalsIgnoreCase("antecedentespersonales"))
+			{
+				System.out.println("Antecedentes personales id cliente "+ request.getParameter("oid_cliente"));
+				AntecedentesPersonalesBLL ap=new AntecedentesPersonalesBLL(
+						request.getParameter("oid_cliente")
+						,request.getParameter("eg")
+						,request.getParameter("oq")
+						,request.getParameter("tma")
+						,request.getParameter("la")						
+						);
+				int id=crearantecedente(ap);
+				if (id>0)
+				{
+					request.setAttribute("exito",id);
+					request.setAttribute("tipo","Alta Cliente");
+					//response.sendRedirect("inicio.jsp");
+					request.getRequestDispatcher("inicio.jsp").forward(request,response);
+				}
+				else
+				{
+					throw new Exception("excepcion mia, no se dio de alta los antecedentes");
+				}
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
+			System.out.println(e);
 		}			
-		
 		
 	}
 	
-	protected void crearcliente(HttpServletRequest request) throws Exception
+	protected int crearcliente(ClienteBLL cli) throws Exception
 	{
-		ClienteBLL cli=new ClienteBLL(
-				request.getParameter("nombre")
-				,request.getParameter("apellido1")
-				,request.getParameter("apellido2")
-				,request.getParameter("edad")
-				,request.getParameter("telefono")
-				);
-		if(	cli.altacliente())
-		{
-			System.out.println("alta cliente ok");
-		}
-		else
-		{
-			System.err.println("error en alta cliente");
-		}
+		return cli.altacliente();
+	}
+	
+	private int crearantecedente(AntecedentesPersonalesBLL ap) {
+		// TODO Auto-generated method stub
+		return ap.altaantecedentes();
 	}
 
 }

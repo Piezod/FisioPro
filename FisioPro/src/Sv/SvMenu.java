@@ -39,7 +39,7 @@ public class SvMenu extends HttpServlet {
 		
 		if (request.getParameter("operacion").equalsIgnoreCase("alta"))
 				{
-						System.out.println("Voy a alta usuario.jsp");
+						System.out.println("Voy a alta usuario.jsp desde sv menu");
 						request.setAttribute("datos", "pantalla de alta usuario");
 						request.getRequestDispatcher("WEB-INF/AltaCliente.jsp").forward(request,response);
 				}
