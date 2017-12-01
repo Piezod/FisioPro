@@ -2,6 +2,7 @@ package BLL;
 
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.plaf.synth.SynthScrollBarUI;
 
@@ -12,6 +13,11 @@ public class ClienteBLL {
 	private Cliente cli;
 	
 	
+	
+	public ClienteBLL(Cliente cli)
+	{
+		this.cli=cli;
+	}
 	public ClienteBLL() {
 		// TODO Auto-generated constructor stub
 	}
@@ -74,5 +80,77 @@ public class ClienteBLL {
 		}
 		
 		return val;
+	}
+
+	public List<Cliente> buscarclientes()
+	{
+		List<Cliente> alist;
+		if (Utilidades.EsNulo(cli.getNombre()))
+		{
+			cli.setNombre("");
+		}
+		
+		ClienteDAL clidal=new ClienteDAL(cli);
+		
+		alist=clidal.buscarclientes();
+		
+	/*	
+	 * Si no encuentro nada en la jsp pondre un modal de no encontrar nada y listo. Aqui no devuelvo siempre
+	 * una 
+	 * if (alist.size()==0)
+		{
+			Cliente vacio=new Cliente();
+			vacio.setNombre("No se encontro ningun registro");
+			vacio.setApellido1("");
+			vacio.setApellido2("");
+			vacio.setEdad("");
+			vacio.setTelefono("");
+			alist.add(vacio);
+		}
+		*/
+		return alist;
+	}
+
+	public List<Cliente> recortarlista(int numeropaginacion,int numeromaximo)
+	{
+		List<Cliente> alist;
+		List<Cliente> auxlist;
+		if (Utilidades.EsNulo(cli.getNombre()))
+		{
+			cli.setNombre("");
+		}
+		
+		ClienteDAL clidal=new ClienteDAL(cli);
+		
+		alist=clidal.buscarclientes();
+	
+		
+		if (numeropaginacion > 0 && numeropaginacion < numeromaximo && numeromaximo > 10)
+		{
+			auxlist=alist.subList(numeropaginacion*10+1, numeropaginacion*10+11);
+		}
+		else if ( numeropaginacion == 0 && numeromaximo < 1 )
+		{
+			auxlist=alist;
+		}
+		else if (numeropaginacion == 0)
+		{
+			auxlist=alist.subList(numeropaginacion, numeropaginacion+10);	
+		}
+		else 
+		{
+			auxlist=alist.subList(numeropaginacion*10+1,alist.size());
+		}
+		
+		return auxlist;
+		
+	}
+	
+	public Cliente RellenarCliente(Cliente cli)
+	{
+		ClienteDAL clidal=new ClienteDAL(cli);
+		
+		return clidal.RellenarCliente(cli);
+		
 	}
 }

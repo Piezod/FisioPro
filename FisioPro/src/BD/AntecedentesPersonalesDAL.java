@@ -102,6 +102,53 @@ public class AntecedentesPersonalesDAL {
 	}
 
 	
+	/**
+	 * Metodo para rellenar un bean alta personales en funcion de la id que se le pase
+	 * 
+     * @return Retonar objeto Antecedentes Personales con los datos almacenados	 
+	 */
+	public AntecedentesPersonales RellenarAntecedentes ()
+	{
+		
+		Cliente auxcli=new Cliente();
+		c=new Conexion();
+		String query="select * from vipr_tantecedentes_personales where oid_cliente = '"+ap.getOid_cliente()+"'";
+				
+		try {
+			
+			ResultSet rs=c.getstm().executeQuery(query);
+			if (rs.next())
+			{
+				
+				ap.setOid_cliente(rs.getInt(1)); // la id cliente y la id de ap son iguales
+				ap.setOid_antecedentes_personales(rs.getInt(2));
+				ap.setEnfermedadesGraves(rs.getString(3));
+				ap.setOperacionesQuirurjicas(rs.getString(4));
+				ap.setTratamientoMedicoActual(rs.getString(5));
+				ap.setLesionesAntiguas(rs.getString(6));
+				
+			}else
+			{
+				ap.setOid_cliente(0); // la id cliente y la id de ap son iguales
+				ap.setOid_antecedentes_personales(0);
+				ap.setEnfermedadesGraves("No se encontro");
+				ap.setOperacionesQuirurjicas("No se encontro");
+				ap.setTratamientoMedicoActual("No se encontro");
+				ap.setLesionesAntiguas("No se encontro");
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+			System.err.println("error en buscar AntecedentesPersonales.RellenarCliente "+ e.getLocalizedMessage() );
+		}
+		finally {
+			
+			c.cerrarConexion();
+		}
+		
+		return ap;
+	}
 	
 	
 	

@@ -4,6 +4,8 @@ import java.beans.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import Entidades.AntecedentesPersonales;
 import Entidades.Cliente;
@@ -14,7 +16,10 @@ public class ClienteDAL {
 	private Conexion c;
 	private AntecedentesPersonales ap;
 	
-	
+	/*
+	 *  Tabla : tcliente
+	 *  Campos : oid_cliente,nombre,apellido,apellido2,edad,telefono.
+	 */
 	
 	/**
 	 * Constructor para ejecutar cosas relativas al cliente propiamente dicho
@@ -35,7 +40,6 @@ public class ClienteDAL {
 	{
 		this.ap=ap;
 	}
-	
 	
 	/**
 	 * Metodo que nos conectara a la base de dato y realizara un insert en la tabla vipr_tcliente. 
@@ -68,8 +72,6 @@ public class ClienteDAL {
 		}
 		return insercion;
 	}
-	
-	
 	
 	/**
 	 * Metodo para recoger el ultimo id introducido. Este metodo se llama despues de dar de alta el cliente 
@@ -142,8 +144,81 @@ public class ClienteDAL {
 		return insercion;
 	}
 	
+	/** Metodo que recorrera la tabla de vipr_tcliente en busqueda de
+	 * clientes con el nombre like '%nombre%'
+	 * 
+	 * @return Devolvera una lista con los clientes encontrados, en caso
+	 * de que no encuentre nada, devolvera la lista con valor null,
+	 */
+	public List<Cliente> buscarclientes()
+	{
+		List<Cliente> listcliente=new ArrayList();
+		
+		c=new Conexion();
+		String query="select * from tcliente where des_nombre like '%"+cli.getNombre()+"%' order by oid_cliente";
+				
+		try {
+			
+			ResultSet rs=c.getstm().executeQuery(query);
+
+			while (rs.next())
+			{
+				Cliente auxcli=new Cliente();
+				auxcli.setOid(rs.getInt(1));
+				auxcli.setNombre(rs.getString(2));
+				auxcli.setApellido1(rs.getString(3));
+				auxcli.setApellido2(rs.getString(4));
+				auxcli.setEdad(rs.getString(5));
+				auxcli.setTelefono(rs.getString(6));
+				listcliente.add(auxcli);
+			}
+			
+						
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+			System.err.println("error en buscar ClienteDal.obtenerultimoid "+ e.getLocalizedMessage() );
+		}
+		finally {
+			c.cerrarConexion();
+		}
+		
+		return listcliente;
+	}
 	
-	
-	
+	/** Metodo para rellenar un bean Cliente 
+	 * @param cli Se le pasa el id del cliente a través de un objeto bean que sera relleno
+	 * @return un objeto tipo Cliente con toda la información basica recargada
+	 */
+	public Cliente RellenarCliente (Cliente cli)
+	{
+		Cliente auxcli=new Cliente();
+		c=new Conexion();
+		String query="select * from tcliente where oid_cliente = '"+cli.getOid()+"'";
+				
+		try {
+			
+			ResultSet rs=c.getstm().executeQuery(query);
+			while (rs.next())
+			{
+				auxcli.setOid(rs.getInt(1));
+				auxcli.setNombre(rs.getString(2));
+				auxcli.setApellido1(rs.getString(3));
+				auxcli.setApellido2(rs.getString(4));
+				auxcli.setEdad(rs.getString(5));
+				auxcli.setTelefono(rs.getString(6));
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+			System.err.println("error en buscar ClienteDal.RellenarCliente "+ e.getLocalizedMessage() );
+		}
+		finally {
+			c.cerrarConexion();
+		}
+		
+		return auxcli;
+	}
 	
 }

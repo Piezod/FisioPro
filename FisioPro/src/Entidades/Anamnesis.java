@@ -2,6 +2,10 @@ package Entidades;
 
 public class Anamnesis {
 	
+	
+	
+	private int oid_anamnesis;
+	private int oid_cliente;
 	private String quelepasa;
 	private String desdecuando;
 	private String aqueloatribuye;
@@ -40,11 +44,25 @@ public class Anamnesis {
 		this.cincoelementos = cincoelementos;
 	}
 	
+
+	public int getOid_anamnesis() {
+		return oid_anamnesis;
+	}
+	public void setOid_anamnesis(int oid_anamnesis) {
+		this.oid_anamnesis = oid_anamnesis;
+	}
+	
+	public int getOid_cliente() {
+		return oid_cliente;
+	}
+	public void setOid_cliente(int oid_cliente) {
+		this.oid_cliente = oid_cliente;
+	}
 	@Override
 	public String toString() {
-		return "Anamnesis [quelepasa=" + quelepasa + ", desdecuando=" + desdecuando + ", aqueloatribuye="
-				+ aqueloatribuye + ", naturalezadeldolor=" + naturalezadeldolor + ", cincoelementos=" + cincoelementos
-				+ "]";
+		return "Anamnesis [oid_anamnesis=" + oid_anamnesis + ", oid_cliente=" + oid_cliente + ", quelepasa=" + quelepasa
+				+ ", desdecuando=" + desdecuando + ", aqueloatribuye=" + aqueloatribuye + ", naturalezadeldolor="
+				+ naturalezadeldolor + ", cincoelementos=" + cincoelementos + "]";
 	}
 	
 	

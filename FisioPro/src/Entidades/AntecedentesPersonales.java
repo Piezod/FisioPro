@@ -6,6 +6,7 @@ public class AntecedentesPersonales {
 	private String TratamientoMedicoActual;
 	private String LesionesAntiguas;
 	private int oid_cliente;
+	private int oid_antecedentes_personales;
 	
 	public String getEnfermedadesGraves() {
 		return EnfermedadesGraves;
@@ -31,18 +32,25 @@ public class AntecedentesPersonales {
 	public void setLesionesAntiguas(String lesionesAntiguas) {
 		LesionesAntiguas = lesionesAntiguas;
 	}
-	
-	@Override
-	public String toString() {
-		return "AntecedentesPersonales [EnfermedadesGraves=" + EnfermedadesGraves + ", OperacionesQuirurjicas="
-				+ OperacionesQuirurjicas + ", TratamientoMedicoActual=" + TratamientoMedicoActual
-				+ ", LesionesAntiguas=" + LesionesAntiguas + "]";
-	}
+
 	public int getOid_cliente() {
 		return oid_cliente;
 	}
 	public void setOid_cliente(int oid_cliente) {
 		this.oid_cliente = oid_cliente;
+	}
+	public int getOid_antecedentes_personales() {
+		return oid_antecedentes_personales;
+	}
+	public void setOid_antecedentes_personales(int oid_antecedentes_personales) {
+		this.oid_antecedentes_personales = oid_antecedentes_personales;
+	}
+	@Override
+	public String toString() {
+		return "AntecedentesPersonales [EnfermedadesGraves=" + EnfermedadesGraves + ", OperacionesQuirurjicas="
+				+ OperacionesQuirurjicas + ", TratamientoMedicoActual=" + TratamientoMedicoActual
+				+ ", LesionesAntiguas=" + LesionesAntiguas + ", oid_cliente=" + oid_cliente
+				+ ", oid_antecedentes_personales=" + oid_antecedentes_personales + "]";
 	}
 
 }

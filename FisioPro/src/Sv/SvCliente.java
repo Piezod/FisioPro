@@ -33,7 +33,7 @@ public class SvCliente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("Served at: ").append(request.getContextPath()+"Servlet cliente");
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class SvCliente extends HttpServlet {
 					request.setAttribute("exito",id);
 					request.setAttribute("tipo","Alta Cliente");
 					//response.sendRedirect("inicio.jsp");
-					request.getRequestDispatcher("inicio.jsp").forward(request,response);
+					request.getRequestDispatcher("/WEB-INF/inicio.jsp").forward(request,response);
 				}
 				else
 				{

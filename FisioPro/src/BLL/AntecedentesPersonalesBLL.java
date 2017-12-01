@@ -87,4 +87,13 @@ public class AntecedentesPersonalesBLL {
 		}
 		
 	}
+
+	public AntecedentesPersonales RellenarAntecedentes (Cliente cli)
+	{
+		AntecedentesPersonales ap=new AntecedentesPersonales();
+		ap.setOid_cliente(cli.getOid());
+		AntecedentesPersonalesDAL apdall=new AntecedentesPersonalesDAL(ap);
+		
+		return apdall.RellenarAntecedentes();
+	}
 }

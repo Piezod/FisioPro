@@ -32,6 +32,11 @@ public class Utilidades {
 		
 	}
 	
+	/**
+	 * Comprueba si la cadena tiene 0 caracteres
+	 * @param cadena
+	 * @return 
+	 */
 	public static boolean EsVacia(String cadena)
 	{
 		if (cadena.trim().length()==0)
@@ -45,6 +50,12 @@ public class Utilidades {
 		
 	}
 	
+		
+	/**Mira si algo ( objeto ) es nulo
+	 *  comprueba objeto == null devuelve true
+	 * @param objeto
+	 * @return
+	 */
 	public static boolean EsNulo (Object objeto)
 	{
 		if (objeto==null)

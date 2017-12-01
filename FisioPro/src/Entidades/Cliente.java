@@ -7,7 +7,7 @@ public class Cliente {
 	private String Apellido2;
 	private int Edad;
 	private int Telefono;
-	private int oid;
+	private int oid_cliente;
 
 	public String getNombre() {
 		return nombre;
@@ -43,13 +43,14 @@ public class Cliente {
 	@Override
 	public String toString() {
 		return "Cliente [nombre=" + nombre + ", Apellido1=" + Apellido1 + ", Apellido2=" + Apellido2 + ", Edad=" + Edad
-				+ ", Telefono=" + Telefono + "]";
+				+ ", Telefono=" + Telefono + ", oid_cliente =" + oid_cliente + "]";
 	}
+	
 	public int getOid() {
-		return oid;
+		return oid_cliente;
 	}
-	public void setOid(int oid) {
-		this.oid = oid;
+	public void setOid(int oid_cliente) {
+		this.oid_cliente = oid_cliente;
 	}
  
 	

@@ -65,22 +65,5 @@ $(document).ready(function () {
     </div>
 
 </div>
-<!-- 
-
-<table>
-<tr>
-<form >
-</form>
-	<th> Usuario  </th> <td> <input type="text"	name="usuario" placeholder="Usuario..." ></td>
-</tr>
-<tr>
-	<th> Pass  </th> <td> <input type="password"	name="pass" placeholder=" Pass ..." ></td>
-</tr>
-<tr>
-	<td><input type="submit" name="entrar" value="Log in"/></td> 
-	<td><input type="submit" name="registrar" value="Alta nueva"/></td>
-</tr>
-</table>
- -->
 </body>
 </html>
