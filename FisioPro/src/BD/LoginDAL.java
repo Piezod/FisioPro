@@ -14,7 +14,7 @@ public class LoginDAL {
 		c=new Conexion();
 	}
 	
-	@SuppressWarnings("finally")
+	
 	public boolean buscarusuario() throws SQLException
 	{
 		
@@ -32,12 +32,14 @@ public class LoginDAL {
 				enc=true;
 			}
 			
-			c.cerrarConexion();
 						
 		} catch (SQLException e) {
 			// TODO: handle exception
-			c.cerrarConexion();
+			
 			System.err.println("error en buscar logindal.buscarusuario");
+		}
+		finally {
+			c.cerrarConexion();
 		}
 		return enc;
 	}
