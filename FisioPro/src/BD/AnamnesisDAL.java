@@ -151,23 +151,23 @@ public class AnamnesisDAL {
 	 * 
 	 * @return Devolvera un objeto anamnesis con los datos de la consulta especifica.
 	 */
-	public Cliente RellenarAnamnesis (Cliente cli)
+	public Anamnesis RellenarAnamnesis (String oid_anamnesis)
 	{
-		Cliente auxcli=new Cliente();
 		c=new Conexion();
-		String query="select * from tcliente where oid_cliente = '"+cli.getOid()+"'";
-				
+		String query="SELECT `oid_anamnesis`, `oid_cliente`, `quelepasa`, `desdecuando`, `aqueloatribuye`"
+				+ " FROM `vipr_tanamnesis`"
+				+ " WHERE oid_anamnesis like '"+oid_anamnesis+"'"; 
+				Anamnesis anam=new Anamnesis();
 		try {
 			
 			ResultSet rs=c.getstm().executeQuery(query);
 			while (rs.next())
-			{
-				auxcli.setOid(rs.getInt(1));
-				auxcli.setNombre(rs.getString(2));
-				auxcli.setApellido1(rs.getString(3));
-				auxcli.setApellido2(rs.getString(4));
-				auxcli.setEdad(rs.getString(5));
-				auxcli.setTelefono(rs.getString(6));
+			{				
+				anam.setOid_anamnesis(Integer.parseInt(oid_anamnesis));
+				anam.setOid_cliente(rs.getInt(2));
+				anam.setQuelepasa(rs.getString(3));
+				anam.setDesdecuando(rs.getString(4));
+				anam.setAqueloatribuye(rs.getString(5));
 			}
 			
 		} catch (Exception e) {
@@ -179,7 +179,7 @@ public class AnamnesisDAL {
 			c.cerrarConexion();
 		}
 		
-		return auxcli;
+		return anam;
 	}
 	
 }

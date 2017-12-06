@@ -5,7 +5,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-
+<STYLE>
+body
+{
+    background: url('IMAGENES/Fondos/altacliente.jpg') fixed;
+    background-size: cover;
+    padding: 0;
+    margin: 0;
+    opacity: 0.8;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+</STYLE>
 <script>
 function altacliente(nombre,ape1,ape2,edad,tlfn,oper){
 	
@@ -39,20 +49,22 @@ function altacliente(nombre,ape1,ape2,edad,tlfn,oper){
 
 
 </head>
-<body>
+<body style="background-color: transparent;">
 <%@ include file="/WEB-INF/Cabecera.jsp" %>
 
 <div class="container">
-<h1 align="center">Alta Cliente</h1>
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
-			<table class="table table-hover thead-light" border="1px">
+		    <div class="panel panel-primary" style="margin-top: 25%">
+      <div class="panel-heading"><h1 align="center">Alta Cliente</h1></div>
+      	<div class="panel-body">
+   			<table class="table table-hover thead-light" border="1px">
 				<form action="SvCliente" method="POST">
-					<tr><th>Nombre</th><td><input type="text" name="nombre" id="nombre"/></td></tr>
-					<tr><th>Primer Apellido</th><td><input type="text" name="apellido1" id="apellido1"/></td></tr>
-					<tr><th>Segundo Apellido</th><td><input type="text" name="apellido2" id="apellido2"/></td></tr>
-					<tr><th>Edad</th><td><input type="text" name="edad" id="edad"/></td></tr>
-					<tr><th>Telefono</th><td><input type="text" name="telefono" id="telefono"/></td></tr>
+					<tr><th>Nombre</th><td><input type="text" class="form-control"  name="nombre" id="nombre"/></td></tr>
+					<tr><th>Primer Apellido</th><td><input type="text" class="form-control"  name="apellido1" id="apellido1"/></td></tr>
+					<tr><th>Segundo Apellido</th><td><input type="text" class="form-control"  name="apellido2" id="apellido2"/></td></tr>
+					<tr><th>Edad</th><td><input type="text" name="edad" class="form-control"  id="edad"/></td></tr>
+					<tr><th>Telefono</th><td><input type="text"  class="form-control"  name="telefono" id="telefono"/></td></tr>
 					<input type="hidden" id="oper" name="oper" value="alta">
 			</table>	
 				<!--  <div class="col-md-4 col-md-offset-4">
@@ -62,8 +74,10 @@ function altacliente(nombre,ape1,ape2,edad,tlfn,oper){
 					 id="btnaltausuario">Alta</button>
 				</div>	 -->
 				<div class="col-md-4 col-md-offset-4">
-					<input type="submit" id="altacliente" name="Alta cliente"></input>
+					<input type="submit" class="btn btn-default" id="altacliente" name="Alta cliente"></input>
 				</div>
+			</div>
+			 </div>
 		</div>
 		</form>
 	</div>

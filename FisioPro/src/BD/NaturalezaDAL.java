@@ -130,23 +130,46 @@ public class NaturalezaDAL {
 	 * 
 	 * @return Devolvera un objeto anamnesis con los datos de la consulta especifica.
 	 */
-	public Cliente RellenarAnamnesis (Cliente cli)
+	public NaturalezaDelDolor RellenarNaturaleza (NaturalezaDelDolor natu)
 	{
-		Cliente auxcli=new Cliente();
+		
 		c=new Conexion();
-		String query="select * from tcliente where oid_cliente = '"+cli.getOid()+"'";
+		String query="SELECT `oid_naturaleza`"
+				+ ", `oid_anamnesis`"
+				+ ", `localizacion`"
+				+ ", `cronologia`"
+				+ ", `irradiacion`"
+				+ ", `forma`"
+				+ ", `hora`"
+				+ ", `intensidad`"
+				+ ", `formadecomienzo`"
+				+ ", `tos`"
+				+ ", `desencadenante`"
+				+ ", `aliviadores`"
+				+ ", `impotencia`"
+				+ ", `cambialugar`"
+				+ " FROM `vipr_tnaturaleza`"
+				+ " WHERE oid_naturaleza = "+natu.getOid_Naturaleza();
 				
 		try {
 			
 			ResultSet rs=c.getstm().executeQuery(query);
 			while (rs.next())
 			{
-				auxcli.setOid(rs.getInt(1));
-				auxcli.setNombre(rs.getString(2));
-				auxcli.setApellido1(rs.getString(3));
-				auxcli.setApellido2(rs.getString(4));
-				auxcli.setEdad(rs.getString(5));
-				auxcli.setTelefono(rs.getString(6));
+				
+				natu.setLocalizacion(rs.getString(3));
+				natu.setCronologia(rs.getString(4));
+				natu.setIrradiacion(rs.getString(5));
+				natu.setForma(rs.getString(6));
+				natu.setHora(rs.getString(7));
+				natu.setIntensidad(rs.getString(8));
+				natu.setFormaComienzo(rs.getString(9));
+				natu.setRelacionTos(rs.getString(10));
+				natu.setFactoresDesencadenantes(rs.getString(11));
+				natu.setFactoresAliviadores(rs.getString(12));
+				natu.setImpotenciaFuncional(rs.getString(13));
+				natu.setCambiaLugar(rs.getString(14));
+				
 			}
 			
 		} catch (Exception e) {
@@ -158,7 +181,7 @@ public class NaturalezaDAL {
 			c.cerrarConexion();
 		}
 		
-		return auxcli;
+		return natu;
 	}
 	
 }

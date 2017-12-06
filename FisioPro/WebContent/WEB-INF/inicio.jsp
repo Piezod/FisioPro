@@ -77,6 +77,10 @@ function verconsultas(){
 <c:if test="${exito > 0 }">
 <%@ include file="/WEB-INF/Modales/modalexito.jsp" %>
 </c:if>
+<c:if test="${exito == 0 }">
+<%@ include file="/WEB-INF/Modales/modalfallo.jsp" %>
+</c:if>
+
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">

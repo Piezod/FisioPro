@@ -111,35 +111,39 @@ public class ExploracionDAL {
 		 * 
 		 * @return Devolvera un objeto anamnesis con los datos de la consulta especifica.
 		 */
-		public Cliente RellenarAnamnesis (Cliente cli)
+		public  Exploracion RellenarExploracion (String oid_explo)
 		{
-			Cliente auxcli=new Cliente();
+			
 			c=new Conexion();
-			String query="select * from tcliente where oid_cliente = '"+cli.getOid()+"'";
-					
+			String query="SELECT `oid_exploracion`"
+					+ ", `visual`"
+					+ ", `palpacion`"
+					+ ", `movilidad`"
+					+ ", `ortopedico`"
+					+ " FROM `vipr_texploracion` "
+					+ "WHERE oid_exploracion like '"+oid_explo+"'";
+			Exploracion explo=new Exploracion();
 			try {
 				
 				ResultSet rs=c.getstm().executeQuery(query);
 				while (rs.next())
 				{
-					auxcli.setOid(rs.getInt(1));
-					auxcli.setNombre(rs.getString(2));
-					auxcli.setApellido1(rs.getString(3));
-					auxcli.setApellido2(rs.getString(4));
-					auxcli.setEdad(rs.getString(5));
-					auxcli.setTelefono(rs.getString(6));
+					explo.setInspeccionVisual(rs.getString(2));
+					explo.setPalpación(rs.getString(3));
+					explo.setTestDeMovilidad(rs.getString(4));
+					explo.setTestOrtopedico(rs.getString(5));
 				}
 				
 			} catch (Exception e) {
 				// TODO: handle exception
 				
-				System.err.println("error en buscar ClienteDal.RellenarCliente "+ e.getLocalizedMessage() );
+				System.err.println("error en buscar ExploracionDAL.RellenarExploracion"+ e.getLocalizedMessage() );
 			}
 			finally {
 				c.cerrarConexion();
 			}
 			
-			return auxcli;
+			return explo;
 		}
 		
 	}

@@ -5,19 +5,20 @@ public class Conexion {
 
 	private Connection conexion=null;
    
-	/*Conexion a hostinger funcionando.
-	 * private String servidor="sql139.main-hosting.eu";
+	//Conexion a hostinger funcionando.
+	private String servidor="sql139.main-hosting.eu";
     private String database="u222872483_java";
     private String usuario="u222872483_java";
     private String password="123456";
-    private String url="";*/
+    private String url="";
  
     
-    private String servidor="localhost";
+    /*private String servidor="localhost";
     private String database="u222872483_java";
     private String usuario="root";
     private String password="123456";
     private String url="";
+    
     /**
      * Metodo para conectar a la base de datos
      * @param servidor el servidor
@@ -25,7 +26,7 @@ public class Conexion {
      * @param usuario
      * @param password
      */
-    public  Conexion(String servidor, String database, String usuario, String password){
+ /*   public  Conexion(String servidor, String database, String usuario, String password){
         try {
  
             this.servidor = servidor;
@@ -46,7 +47,7 @@ public class Conexion {
         catch (ClassNotFoundException ex) {
             System.out.println(ex);
         }
-    }
+    }*/
     
     /**
      * Metodo para conectar a la base de datos
@@ -65,6 +66,8 @@ public class Conexion {
             //Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
             url="jdbc:mysql://"+servidor+"/"+database;
             System.out.println(url);
+            //Esto permite aumentar el tiempo de espera
+            DriverManager.setLoginTimeout(120);
             conexion=DriverManager.getConnection(url, usuario, password);
             System.out.println("Conexion a Base de Datos "+url+" . . . . .Ok");
  

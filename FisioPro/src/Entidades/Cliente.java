@@ -2,11 +2,11 @@ package Entidades;
 
 public class Cliente {
 	
-	private String nombre;
-	private String Apellido1;
-	private String Apellido2;
-	private int Edad;
-	private int Telefono;
+	private String nombre = "Vacio";
+	private String Apellido1 = "Vacio";
+	private String Apellido2 = "Vacio";
+	private int Edad = 99;
+	private int Telefono = 666666666;
 	private int oid_cliente;
 
 	public String getNombre() {

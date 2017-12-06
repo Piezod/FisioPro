@@ -12,13 +12,15 @@ import Entidades.Cliente;
 
 public class ClienteDAL {
 
+	
+	
 	private Cliente cli;
 	private Conexion c;
 	private AntecedentesPersonales ap;
 	
 	/*
 	 *  Tabla : tcliente
-	 *  Campos : oid_cliente,nombre,apellido,apellido2,edad,telefono.
+	 *  Campos : oid_cliente,des_nombre,des_apellido1,des_apellido2,edad,telefono.
 	 */
 	
 	/**
@@ -30,6 +32,15 @@ public class ClienteDAL {
 		this.cli=cli;
 		
 		// TODO Auto-generated constructor stub
+	}
+	
+	/**
+	 * Si tengo que hacer consultas pero no se NADA del cliente es muy util, por ejemplo para rellenar
+	 * el combobox de todos los clientes
+	 */
+	public ClienteDAL()
+	{
+		
 	}
 	
 	/**
@@ -190,18 +201,19 @@ public class ClienteDAL {
 	 * @param cli Se le pasa el id del cliente a través de un objeto bean que sera relleno
 	 * @return un objeto tipo Cliente con toda la información basica recargada
 	 */
-	public Cliente RellenarCliente (Cliente cli)
+	public Cliente RellenarCliente (String cli)
 	{
 		Cliente auxcli=new Cliente();
+		auxcli.setOid(Integer.parseInt(cli));
 		c=new Conexion();
-		String query="select * from tcliente where oid_cliente = '"+cli.getOid()+"'";
+		String query="select * from tcliente where oid_cliente = '"+auxcli.getOid()+"'";
 				
 		try {
 			
 			ResultSet rs=c.getstm().executeQuery(query);
 			while (rs.next())
 			{
-				auxcli.setOid(rs.getInt(1));
+				
 				auxcli.setNombre(rs.getString(2));
 				auxcli.setApellido1(rs.getString(3));
 				auxcli.setApellido2(rs.getString(4));
@@ -221,4 +233,42 @@ public class ClienteDAL {
 		return auxcli;
 	}
 	
+	/**Metodo que nos devolvera TODOS los clientes
+	 * @return Lista de tipo cliente con los datos de todos nuestros clientes almacenados.
+	 */
+	public List<Cliente> RecargarTodosCliente ()
+	{
+		List<Cliente> listcliente=new ArrayList();
+		
+		c=new Conexion();
+		String query="select * from tcliente order by des_nombre";
+				
+		try {
+			
+			ResultSet rs=c.getstm().executeQuery(query);
+
+			while (rs.next())
+			{
+				Cliente auxcli=new Cliente();
+				auxcli.setOid(rs.getInt(1));
+				auxcli.setNombre(rs.getString(2));
+				auxcli.setApellido1(rs.getString(3));
+				auxcli.setApellido2(rs.getString(4));
+				auxcli.setEdad(rs.getString(5));
+				auxcli.setTelefono(rs.getString(6));
+				listcliente.add(auxcli);
+			}
+			
+						
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+			System.err.println("error en buscar ClienteDal.RecargarTodosCliente "+ e.getLocalizedMessage() );
+		}
+		finally {
+			c.cerrarConexion();
+		}
+		
+		return listcliente;
+	}
 }

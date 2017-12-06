@@ -56,10 +56,10 @@ public class ConsultaDAL {
 			String query="insert into vipr_tconsulta values (?,?,?,?,?,?,?)";
 			GregorianCalendar g=new GregorianCalendar();
 			Date d1=new Date();
-			System.out.println("Alta de consulta : en la fecha");
+			System.out.print("Alta de consulta : en la fecha ");
 			System.out.println(d1);
-			String newdate=new SimpleDateFormat("dd-MM-yyyy").format(d1);
-			System.out.println(newdate);
+			String newdate=new SimpleDateFormat("yyyy-MM-dd").format(d1);
+			System.out.println("Fecha con formato "+newdate);
 			try {
 				PreparedStatement psResulset = c.getConexion().prepareStatement(query);
 				psResulset.setInt(1,0); // Este campo es autoincremental en la bd
@@ -203,5 +203,114 @@ public class ConsultaDAL {
 			
 		}
 		
-	}
+		public List<DetalleConsulta> rellenarconsultaporcliente(Consulta consul) {
+			
+			List<DetalleConsulta> lista=new ArrayList<>();
+			c=new Conexion();
+			int enc=0;
+			String query="SELECT `oid_consulta`"
+					+ ", `oid_cliente`"
+					+ ", `oid_anamnesis`"
+					+ ", `oid_exploracion`"
+					+ ", `oid_tratamiento`"
+					+ ", `fecha`"
+					+ ", `motivo` "
+					+ "FROM `vipr_tconsulta`"
+					+ " WHERE oid_cliente = "+consul.getOid_cliente();
+					
+			try {
+				
+				ResultSet rs=c.getstm().executeQuery(query);
+				
+				while (rs.next())
+				{
+					DetalleConsulta detalleconsulta=new DetalleConsulta();
+					detalleconsulta.setOid_consulta(rs.getString(1));
+					
+					//recargamos los datos del cliente
+					ClienteDAL cd=new ClienteDAL();
+					detalleconsulta.setDetallecliente(cd.RellenarCliente(rs.getString(2)));
+					
+					//recargamos los datos de la anamnesis
+					AnamnesisDAL anamdal=new AnamnesisDAL();
+					detalleconsulta.setDetalleanamnesis(anamdal.RellenarAnamnesis(rs.getString(3)));
+					
+					//recargamos los datos correspondientes a la exploracion
+					ExploracionDAL explodal=new ExploracionDAL();
+					detalleconsulta.setDetalleexploración(explodal.RellenarExploracion(rs.getString(4)));
+					
+					//recargamos los datos del tratamiento
+					TratamientoDAL tratadal=new TratamientoDAL();
+					detalleconsulta.setDetalletratamiento(tratadal.RellenarTratamiento(rs.getString(5)));
+					
+					detalleconsulta.setFecha(rs.getString(6));
+					detalleconsulta.setMotivo(rs.getString(7));
+					lista.add(detalleconsulta);
+					
+				}
+							
+			} catch (Exception e) {
+				// TODO: handle exception
+				
+				System.err.println("error en buscar ConsultaDAL.rellenarconsulta"+ e );
+			}
+			finally {
+				c.cerrarConexion();
+			}
+			return lista;
+			
+		}
+		
+		public List<PreVerDetalleConsulta> preverdetalleconsultas()
+		{
+			List<PreVerDetalleConsulta> lista=new ArrayList<>();
+			c=new Conexion();
+			
+					String query="select vipr_tconsulta.oid_consulta\r\n" + 
+							",tcliente.des_nombre\r\n" + 
+							
+							",vipr_tanamnesis.quelepasa\r\n" + 
+							",vipr_ttratamiento.des_tratamiento\r\n" + 
+							",vipr_tconsulta.fecha\r\n" + 
+							",tcliente.des_apellido1\r\n" +
+							",vipr_tconsulta.oid_anamnesis\r\n" + 
+							",vipr_tconsulta.oid_exploracion\r\n" + 
+							",vipr_tconsulta.oid_tratamiento\r\n" + 
+							"from vipr_tconsulta\r\n" + 
+							"inner join tcliente on  vipr_tconsulta.oid_cliente=tcliente.oid_cliente\r\n" + 
+							"inner join vipr_tanamnesis on vipr_tconsulta.oid_anamnesis=vipr_tanamnesis.oid_anamnesis\r\n" + 
+							"inner join vipr_texploracion on  vipr_tconsulta.oid_exploracion=vipr_texploracion.oid_exploracion\r\n" + 
+							"inner join vipr_ttratamiento on vipr_tconsulta.oid_tratamiento=vipr_ttratamiento.oid_tratamiento\r\n" + 
+							"where vipr_tconsulta.oid_cliente = "+consul.getOid_cliente();
+			try {
+				
+				ResultSet rs=c.getstm().executeQuery(query);
+				
+				while (rs.next())
+				{
+					PreVerDetalleConsulta consul=new PreVerDetalleConsulta();
+					consul.setOid_consulta(rs.getInt(1));
+					consul.setNombrecliente(rs.getString(2));
+					consul.setQuelepasa(rs.getString(3));
+					consul.setTratamiento(rs.getString(4));
+					consul.setFecha(rs.getString(5));
+					consul.setApellido1(rs.getString(6));
+					consul.setOid_anamnesis(rs.getInt(7));
+					consul.setOid_exploración(rs.getInt(8));
+					consul.setOid_tratamiento(rs.getInt(9));
+					lista.add(consul);					
+				}
+							
+			} catch (Exception e) {
+				// TODO: handle exception
+				
+				System.err.println("error en buscar ConsultaDAL.preverdetalleconsultas"+ e );
+			}
+			finally {
+				c.cerrarConexion();
+			}
+			return lista;
+		}
+		
+}
 

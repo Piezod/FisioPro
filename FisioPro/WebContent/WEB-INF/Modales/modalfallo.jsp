@@ -10,7 +10,7 @@
         <h4 class="modal-title">Modal Header</h4>
       </div>
       <div class="modal-body">
-        <div class="label label-default">
+        <div class="label label-danger">
        <p>Se produjo un error en ${tipo} no se ha podido llevar a cabo la operacion</p>
         </div>
       </div>

@@ -25,11 +25,20 @@ public class ClienteBLL {
 	public ClienteBLL(String nombre,String ape1,String ape2,String edad,String telefono) throws Exception {
 		// TODO Auto-generated method stub
 		cli=new Cliente();
-		cli.setNombre(nombre);
-		cli.setApellido1(ape1);
-		cli.setApellido2(ape2);
-		cli.setEdad(edad);
-		cli.setTelefono(telefono);
+		if (!Utilidades.EsVacia(nombre))
+		{
+			cli.setNombre(nombre);
+		}
+		if (!Utilidades.EsVacia(ape1)) {
+			cli.setApellido1(ape1);	
+		}
+		if (!Utilidades.EsVacia(ape2)) {
+			cli.setApellido1(ape2);	
+		}
+		if (!Utilidades.EsVacia(edad)) {
+		cli.setEdad(edad);}
+		if (!Utilidades.EsVacia(telefono)) {
+		cli.setTelefono(telefono);}
 	}
 	
 	/**
@@ -81,6 +90,8 @@ public class ClienteBLL {
 		
 		return val;
 	}
+	
+	
 
 	public List<Cliente> buscarclientes()
 	{
@@ -150,7 +161,22 @@ public class ClienteBLL {
 	{
 		ClienteDAL clidal=new ClienteDAL(cli);
 		
-		return clidal.RellenarCliente(cli);
+		return clidal.RellenarCliente(""+cli.getOid());
 		
+	}
+	
+	public List<Cliente> RecargarTodosCliente()
+	{
+		List<Cliente> alist;
+		List<Cliente> auxlist;
+		
+		ClienteDAL clidal=new ClienteDAL();
+		
+		alist=clidal.RecargarTodosCliente();
+	
+		
+		
+		
+		return alist;
 	}
 }
