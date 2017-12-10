@@ -30,5 +30,11 @@ public class TratamientoBLL {
 		TratamientoDAL traDAL=new TratamientoDAL(tra);
 		return traDAL.obtenerultimoid();
 	}
+
+	public Tratamiento RellenarTratamiento() {
+		TratamientoDAL tradal=new TratamientoDAL(tra);
+		
+		return tradal.RellenarTratamiento(""+tra.getOid_tratamiento());
+	}
 	
 }

@@ -132,6 +132,7 @@ public class SvConsulta extends HttpServlet {
 				request.getRequestDispatcher("/WEB-INF/inicio.jsp").forward(request,response);
 			}
 		}
+			
 
 			
 		} catch (Exception e) {

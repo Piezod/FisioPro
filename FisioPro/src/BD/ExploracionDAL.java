@@ -113,7 +113,6 @@ public class ExploracionDAL {
 		 */
 		public  Exploracion RellenarExploracion (String oid_explo)
 		{
-			
 			c=new Conexion();
 			String query="SELECT `oid_exploracion`"
 					+ ", `visual`"
@@ -128,6 +127,7 @@ public class ExploracionDAL {
 				ResultSet rs=c.getstm().executeQuery(query);
 				while (rs.next())
 				{
+					explo.setOid_exploración(Integer.parseInt(oid_explo));
 					explo.setInspeccionVisual(rs.getString(2));
 					explo.setPalpación(rs.getString(3));
 					explo.setTestDeMovilidad(rs.getString(4));
@@ -145,6 +145,8 @@ public class ExploracionDAL {
 			
 			return explo;
 		}
+
+
 		
 	}
 

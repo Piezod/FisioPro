@@ -63,4 +63,14 @@ public class AnamnesisBLL {
 			an.setAqueloatribuye("No sabe");
 		}
 	}
+
+	/** Metodo para rellenar un bean de datos 
+	 * @return Un objeto tipo anamnesis relleno de datos
+	 */
+	public Anamnesis rellenaranamnesis()
+	{
+		AnamnesisDAL anamdal=new AnamnesisDAL();
+		
+		return anamdal.RellenarAnamnesis(""+an.getOid_anamnesis()); 
+	}
 }
