@@ -76,16 +76,16 @@
                   </table>
                   <form method="post" action="SvConsulta">
                   <input type="hidden" value="${cliente.oid}" name="cliente"/>
-                  <button type="submit" value="alta" name="oper" class="btn btn-primary">Alta Consulta</button>
-                  <button type="submit" value="VerConsultas" name="oper" class="btn btn-primary">Ver Consultas</button>
+                  <button type="submit" value="alta" name="oper" class="btn btn-primary">Alta Consulta</button>                  
                   </form>
+                  <a href="SvVerConsultas?oper=detalleconsulta&oid_cliente=${cliente.oid}" value="VerConsultas" name="oper" class="btn btn-primary">Ver Consultas</a>
                 </div>
               </div>
             </div>
                  <div class="panel-footer">
                         <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
                         <span class="pull-right">
-                            <a href="edit.html" data-original-title="Editar cliente" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                            <a href="SvCliente.html" data-original-title="Editar cliente" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
                             <a data-original-title="Eliminar Usuario" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
                         </span>
                     </div>

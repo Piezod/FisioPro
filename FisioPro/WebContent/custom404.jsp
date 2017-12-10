@@ -21,9 +21,8 @@
 </head>
 <body>
 
-<div class="container">
-  <img id="404" class="img-responsive" src="IMAGENES/error404.jpg" alt="Error 404" width="100%" height="100%"> 
-</div>
+  <img id="404" class="img-responsive" src="IMAGENES/404-planet.gif" alt="Error 404" width="100%" height="80%"> 
+
 
 </body>
 </html>

@@ -21,28 +21,7 @@ $(document).ready(function(){
 });
 
 
-// When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-$(document).on("click", "#vertabla", function() { 
-	alert("recarga de tabla");
-	// Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response JSON...
-    $.post("PruebaAjax", function(responseJson) { 
-    	console.log(responseJson);
-    	// Create HTML <table> element and append it to HTML DOM element with ID "somediv".
-       var $tablec = $("<table>").appendTo($("#tablaconsultas")); 
-     // Iterate over the JSON array.
-        $.each(responseJson, function(index, item) { 
-        	console.log("Indice "+index +"Item "+item);
-            // Create HTML <tr> element, set its text content with currently iterated item and append it to the <table>.
-        	$("<tr>").appendTo($tablec)   
-                // Create HTML <td> element, set its text content with id of currently iterated product and append it to the <tr>.
-        	  .append($("<td>").text(item.oid_consulta))     
-                   // Create HTML <td> element, set its text content with name of currently iterated product and append it to the <tr>.
-              .append($("<td>").text(item.oid_cliente))
-                // Create HTML <td> element, set its text content with price of currently iterated product and append it to the <tr>.
-              .append($("<td>").text(item.oid_anamnesis));  
-      });    
-        });
-    });
+
 
 function verconsultas(){
 	
@@ -50,9 +29,7 @@ function verconsultas(){
 	
     var parametros = {
             "oper" : oper
-    }
-    
-    
+    }    
     alert(oper);
     
     $.ajax({
@@ -77,6 +54,10 @@ function verconsultas(){
 <c:if test="${exito > 0 }">
 <%@ include file="/WEB-INF/Modales/modalexito.jsp" %>
 </c:if>
+<c:if test="${exito == 0 }">
+<%@ include file="/WEB-INF/Modales/modalfallo.jsp" %>
+</c:if>
+
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">

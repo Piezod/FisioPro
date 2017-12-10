@@ -33,7 +33,7 @@ public class SvCliente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath()+"Servlet cliente");
+		doPost(request, response);
 	}
 
 	/**
@@ -41,8 +41,10 @@ public class SvCliente extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		String OPERACION = request.getParameter("oper");
 		try {
-			if (request.getParameter("oper").equalsIgnoreCase("alta"))
+			if (OPERACION.equalsIgnoreCase("alta"))
 			{
 				ClienteBLL cli=new ClienteBLL(request.getParameter("nombre")
 						,request.getParameter("apellido1")
@@ -58,7 +60,7 @@ public class SvCliente extends HttpServlet {
 				if (idcliente>0)
 				{
 					request.setAttribute("idcliente",idcliente);
-					request.getRequestDispatcher("WEB-INF/AntecedentesPersonales.jsp").forward(request,response);
+					request.getRequestDispatcher("WEB-INF/AltaCliente/AntecedentesPersonales.jsp").forward(request,response);
 				}
 				else
 				{
@@ -66,11 +68,11 @@ public class SvCliente extends HttpServlet {
 				}
 				
 			}
-			else if (request.getParameter("oper").equalsIgnoreCase("baja"))
+			else if (OPERACION.equalsIgnoreCase("baja"))
 			{
 				System.out.println("Voy a alta baja cliente.jsp");
 			}
-			else if (request.getParameter("oper").equalsIgnoreCase("modificacion"))
+			else if (OPERACION.equalsIgnoreCase("modificacion"))
 			
 			{
 				System.out.println("Voy a alta modificacion cliente.jsp");
@@ -96,7 +98,13 @@ public class SvCliente extends HttpServlet {
 				{
 					throw new Exception("excepcion mia, no se dio de alta los antecedentes");
 				}
+			}else if (OPERACION.equalsIgnoreCase("buscarcliente"))
+			{
+				request.getRequestDispatcher("/WEB-INF/Cliente/ConsultaCliente.jsp").forward(request,response);
 			}
+			
+			
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e);

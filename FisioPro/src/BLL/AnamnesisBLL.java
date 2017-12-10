@@ -2,6 +2,8 @@ package BLL;
 
 import java.sql.SQLException;
 
+import com.mysql.jdbc.Util;
+
 import BD.AnamnesisDAL;
 import Entidades.Anamnesis;
 import Entidades.Cliente;
@@ -35,7 +37,8 @@ public class AnamnesisBLL {
 	{
 		Cliente cli=new Cliente();
 		cli.setOid(Integer.parseInt(oid_cliente));
-		AnamnesisDAL anamdal=new AnamnesisDAL(an,cli);
+		forzarvacios();
+		AnamnesisDAL anamdal=new AnamnesisDAL(an,cli);		
 		return anamdal.AltaAnamnesis();
 	}
 	
@@ -45,4 +48,29 @@ public class AnamnesisBLL {
 		return anamdal.obtenerultimoid();
 	}
 
+	private void forzarvacios()
+	{
+		if(Utilidades.EsVacia(an.getQuelepasa()))
+		{
+			an.setQuelepasa("No sabe");
+		}
+		if (Utilidades.EsVacia(an.getDesdecuando()))
+		{
+			an.setDesdecuando("No sabe");
+		}
+		if (Utilidades.EsVacia(an.getAqueloatribuye()))
+		{
+			an.setAqueloatribuye("No sabe");
+		}
+	}
+
+	/** Metodo para rellenar un bean de datos 
+	 * @return Un objeto tipo anamnesis relleno de datos
+	 */
+	public Anamnesis rellenaranamnesis()
+	{
+		AnamnesisDAL anamdal=new AnamnesisDAL();
+		
+		return anamdal.RellenarAnamnesis(""+an.getOid_anamnesis()); 
+	}
 }

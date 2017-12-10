@@ -57,7 +57,7 @@ public class SvConsulta extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	
 		 /*
 		  * Ojo alta consulta luego tiene que decir si es nueva ( nueva consulta desde 0 )
 		  * seguimiento ( es un alta consulta pero estara relacionada con una anterior)
@@ -132,6 +132,7 @@ public class SvConsulta extends HttpServlet {
 				request.getRequestDispatcher("/WEB-INF/inicio.jsp").forward(request,response);
 			}
 		}
+			
 
 			
 		} catch (Exception e) {

@@ -102,15 +102,16 @@ public class TratamientoDAL {
 			return enc;
 		}
 		
-		/** Metodo que devolvera el anamnesis de una consulta en concreto
+		/** Metodo que devolvera el tratamiento de una consulta en concreto
 		 * 
 		 * @return Devolvera un objeto anamnesis con los datos de la consulta especifica.
 		 */
-		public Tratamiento RellenarTratamiento (Tratamiento tra)
+		public Tratamiento RellenarTratamiento (String oid_tra)
 		{
 			Tratamiento auxtra=new Tratamiento();
+			auxtra.setOid_tratamiento(Integer.parseInt(oid_tra));
 			c=new Conexion();
-			String query="select * from vipr_ttratamiento where oid_Tratamiento = '"+tra.getOid_tratamiento()+"'";
+			String query="select * from vipr_ttratamiento where oid_Tratamiento = '"+auxtra.getOid_tratamiento()+"'";
 					
 			try {
 				

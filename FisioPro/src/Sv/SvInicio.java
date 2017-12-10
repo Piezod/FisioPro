@@ -35,20 +35,23 @@ public class SvInicio extends HttpServlet {
 	 */
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
+	
+		 	String OPERACION = request.getParameter("operacion");
 		try {
-			if (request.getParameter("operacion").equalsIgnoreCase("login"))
+			if (OPERACION.equalsIgnoreCase("login"))
 					{
 						login(request.getParameter("usuario"),request.getParameter("pass"),request,response);
 						
 					}
-			else if (request.getParameter("operacion").equalsIgnoreCase("recordar"))
+			else if (OPERACION.equalsIgnoreCase("recordar"))
 			{
 				
+			}else if (OPERACION.equalsIgnoreCase("inicio"))
+			{
+				request.getRequestDispatcher("WEB-INF/inicio.jsp").forward(request,response);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 		}
 	}

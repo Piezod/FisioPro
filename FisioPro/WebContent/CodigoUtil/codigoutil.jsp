@@ -30,18 +30,7 @@ body {
   background-color: #6495ED;
 }
 
-Codigo ajax para recibir una respuesta en texto plano
- // When HTML DOM "click" event is invoked on element with ID "somebutton"
- // , execute the following function...
-    $(document).on("click", "#ajaxstring", function() { 
-    	// Execute Ajax GET request on URL of "someservlet" 
-    	//and execute the following function with Ajax response text...
-    	$.post("PruebaAjax", function(responseText) { 
-        	// Locate HTML DOM element with ID "somediv" and set its text content with the response text.
-        	alert(responseText);
-        	$("#datoajaxrecogido").text(responseText);   
-        });
-    });
+
     
     
     CODIGO AJAX PARA RECORRER UNA LISTA
@@ -58,3 +47,29 @@ $(document).on("click", "#relista", function() {
         });
     });
 });
+
+
+CODIGO AJAX PARAR ECARGAR Y CREAR UAN TABLA
+
+// When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+$(document).on("click", "#vertabla", function() { 
+	alert("recarga de tabla");
+	// Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response JSON...
+    $.post("PruebaAjax", function(responseJson) { 
+    	console.log(responseJson);
+    	// Create HTML <table> element and append it to HTML DOM element with ID "somediv".
+       var $tablec = $("<table>").appendTo($("#tablaconsultas")); 
+     // Iterate over the JSON array.
+        $.each(responseJson, function(index, item) { 
+        	console.log("Indice "+index +"Item "+item);
+            // Create HTML <tr> element, set its text content with currently iterated item and append it to the <table>.
+        	$("<tr>").appendTo($tablec)   
+                // Create HTML <td> element, set its text content with id of currently iterated product and append it to the <tr>.
+        	  .append($("<td>").text(item.oid_consulta))     
+                 // Create HTML <td> element, set its text content with name of currently iterated product and append it to the <tr>.
+              .append($("<td>").text(item.oid_cliente))
+                // Create HTML <td> element, set its text content with price of currently iterated product and append it to the <tr>.
+              .append($("<td>").text(item.oid_anamnesis));  
+      });    
+        });
+    });
