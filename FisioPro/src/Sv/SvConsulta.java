@@ -126,9 +126,10 @@ public class SvConsulta extends HttpServlet {
 			if (altatratamiento(request)>0)
 			{
 				consulta.setOid_tratamiento(ObtenerUltimaIdTratamiento());
+				String mensaje="<div class=\"alert alert-info\"><strong>Consulta dada de ALTA</strong style=\"margin : 5px\"></div>";
 				
 				request.setAttribute("exito", altaconsulta());
-				request.setAttribute("tipo","Consulta dada de alta");
+				request.setAttribute("tipo",mensaje);
 				request.getRequestDispatcher("/WEB-INF/inicio.jsp").forward(request,response);
 			}
 		}

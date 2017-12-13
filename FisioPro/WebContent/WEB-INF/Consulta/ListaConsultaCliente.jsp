@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>FisioPro - Buscar Cliente</title>
 
 <%@ include file="/WEB-INF/Cabecera.jsp" %>
 <script>
@@ -35,6 +35,7 @@ $(document).ready( function() {
 	   
 	 $.fn.MessageBox = function(msg) {
 	        url = "SvConsultaCliente?oper=perfil&oid="+msg;
+	        
 		      $(location).attr("href", url);
 	    };
 

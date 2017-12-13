@@ -4,9 +4,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>FisioPro - Anamnesis</title>
 
 </head>
+<style type="text/css">
+body {
+    background-image: url("IMAGENES/Fondos/10.jpg");
+    background-repeat: no-repeat;
+}
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #E6E6FA;
+}
+</style>
 <body>
 <%@ include file="/WEB-INF/Cabecera.jsp" %>
 
@@ -17,9 +26,18 @@
 			<h3 align="center">Anamnesis</h3>
 			<table class="table table-hover thead-light" border="1px">
 				<form action="SvConsulta" method="POST">
-					<tr><th>Que Le Sucede</th><td><input type="text" name="qls" id="qls"/></td></tr>
-					<tr><th>Desde Cuando</th><td><input type="text" name="dc" id="dc"/></td></tr>
-					<tr><th>A que lo atribuye</th><td><input type="text" name="atribuye" id="atribuye"/></td></tr>
+					<tr>
+						<th>Que Le Sucede</th>
+						<td><textarea cols="50" rows="4" type="text" name="qls" id="qls"></textarea></td>
+					</tr>
+					<tr>
+						<th>Desde Cuando</th>
+						<td><textarea  cols="50" rows="4"  type="text" name="dc" id="dc"></textarea></td>
+					</tr>
+					<tr>
+						<th>A que lo atribuye</th>
+						<td><textarea noresize cols="50" rows="4"  type="text" name="atribuye" id="atribuye"></textarea></td>
+					</tr>
 					<input type="hidden" id="oper" name="oper" value="naturaleza">
 					<input type="hidden" name="cliente" value="${cliente}"/>
 						<div class="col-md-4 col-md-offset-4">

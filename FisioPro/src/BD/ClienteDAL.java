@@ -171,7 +171,6 @@ public class ClienteDAL {
 		try {
 			
 			ResultSet rs=c.getstm().executeQuery(query);
-
 			while (rs.next())
 			{
 				Cliente auxcli=new Cliente();
@@ -270,5 +269,70 @@ public class ClienteDAL {
 		}
 		
 		return listcliente;
+	}
+
+	public int actualizarcliente() {
+		int insercion = 0;
+		c=new Conexion();
+		
+		String query="update tcliente set "
+				+ "des_nombre= ?"
+				+ " , des_apellido1 = ?"
+				+ " , des_apellido2 = ?"
+				+ " , edad = ? "
+				+ " , telefono = ?"
+				+ " where oid_cliente = ?";
+		
+		try {
+			PreparedStatement psResulset = c.getConexion().prepareStatement(query);
+			//valores
+			psResulset.setString(1, cli.getNombre());
+			psResulset.setString(2, cli.getApellido1());
+			psResulset.setString(3, cli.getApellido2());
+			psResulset.setInt(4, cli.getEdad());
+			psResulset.setInt(5, cli.getTelefono());
+			//where
+			psResulset.setInt(6, cli.getOid());
+			insercion=psResulset.executeUpdate();
+						 
+		} catch (SQLException e) {
+			// TODO: handle exception
+			
+			System.err.println("error en buscar ClienteDAL.actualizarcliente" + e);
+		}
+		finally {
+			c.cerrarConexion();
+		}
+		return insercion;
+	}
+
+	
+	/**
+	 * Metodo que realiza la baja del cliente de la bd.
+	 */
+	public int eliminarcliente() {
+
+		int baja = 0;
+		c=new Conexion();
+		String query="DELETE FROM tcliente  "
+				+ " where oid_cliente = ?";
+		
+		try {
+			PreparedStatement psResulset = c.getConexion().prepareStatement(query);
+
+			//where
+			psResulset.setInt(1, cli.getOid());
+			baja=psResulset.executeUpdate();
+						 
+		} catch (SQLException e) {
+			// TODO: handle exception
+			
+			System.err.println("error en buscar ClienteDAL.actualizarcliente" + e);
+		}
+		finally {
+			c.cerrarConexion();
+		}
+		return baja;
+		
 	}
 }

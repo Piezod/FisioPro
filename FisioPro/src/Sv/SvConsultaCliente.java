@@ -24,6 +24,7 @@ public class SvConsultaCliente extends HttpServlet {
 	private static Integer NumeroMaximoRegistros=0;
 	private static Integer NumeroPaginaciones=0;
 	private static String NumeroPulsado="0";
+	private static List<Cliente> list=new ArrayList<>();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -87,8 +88,9 @@ public class SvConsultaCliente extends HttpServlet {
 	 */
 	private List<Cliente> buscarclientes(Cliente cli)
 	{
-		List<Cliente> list=new ArrayList<>();
+		
 		ClienteBLL clibl=new ClienteBLL(cli);
+		
 				list=clibl.buscarclientes();
 				/*
 				 * Saco el numero de registros encontrados
@@ -97,7 +99,14 @@ public class SvConsultaCliente extends HttpServlet {
 				/*
 				 * Lo divido entre 10 porque mostrare de 10 en 10 las consultas
 				 */
-				NumeroPaginaciones=NumeroMaximoRegistros/10;
+				if (NumeroMaximoRegistros%10>0)
+				{
+					NumeroPaginaciones=(NumeroMaximoRegistros/10);
+				}else
+				{
+					NumeroPaginaciones=(NumeroMaximoRegistros/10)-1;
+				}
+				
 				
 				/*
 				 * Recojo el numero pulsado, si no hay boton, es porque nos ehace recarga desde la consulta

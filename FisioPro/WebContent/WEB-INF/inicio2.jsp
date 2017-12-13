@@ -9,7 +9,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Hola <%request.getAttribute("datos"); %></h1>
 <h1><c:out value="${datos}" /></h1>
 <p> directamente con request</p>
 <h1>${requestScope.datos}</h1>

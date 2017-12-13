@@ -16,8 +16,8 @@
 			<tr>
 				<th>Tratamiento</th>
 				<td>
-					<textarea name="tratamiento" form="trataform">
-					Enter text here...
+					<textarea cols="50" rows="4"  class="form-control" name="tratamiento" form="trataform">
+					
 					</textarea>
 				</td>
 			</tr>

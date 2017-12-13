@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>FisioPro - Seleccion Tipo Consulta</title>
 
 </head>
 <body>
@@ -19,21 +19,30 @@
 				
 					<input type="hidden" name="cliente" value="${cliente}"/>
 					<tr>
-						<td><input type="radio" name="oper" value="nueva">Nueva Consulta</td>
+						<td><input type="radio" id="nueva" name="oper" value="nueva">Nueva Consulta</td>
 					</tr>
 					<tr>
-						<td><input type="radio" name="oper" value="seguimiento">Seguimiento de otra consulta</td>						
+						<td><input type="radio" id="vieja" name="oper" value="seguimiento">Seguimiento de otra consulta</td>						
 					</tr>
 			</table>	
 
 				<div class="col-md-4 col-md-offset-4">
-					<button type="submit" class="btn btn-success">Continuar</button>
+					<button id="continuar" type="submit" name="oper" value="nueva" class="btn btn-success">Continuar</button>
 				</div>
 		</div>
 		</form>
 	</div>
 </div>
 </body>
+
+<script type="text/javascript">
+$( "#continuar" ).click(function() {
+	  console.log($("#nueva").val());
+	  console.log($("#vieja").val());
+
+	});
+
+</script>
 
 <!-- Modal -->
 <div id="modalnotificacion" class="modal fade" role="dialog">

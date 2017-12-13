@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>FisioPro - Naturaleza del Dolor</title>
 <style type="text/css">
 body {
     background-image: url("IMAGENES/Fondos/10.jpg");
@@ -26,13 +26,13 @@ body {
 		<!-- Los textArea por un lado -->
 		<p>${oid_anamnesis}</p>
 		<table class="table table-hover thead-light" border="1px">
-			<tr><th>Localización</th><td><input type="text" value=" " name="localizacion" id="localizacion"/></td></tr>
-			<tr><th>Irradiacion</th><td><input type="text" value=" "  name="irradiacion" id="irradiacion"/></td></tr>
-			<tr><th>Cambia de lugar</th><td><input type="text"  value=" " name="cambialugar" id="cambialugar"/></td></tr>
+			<tr><th>Localización</th><td><input class="form-control" type="text" value=" " name="localizacion" id="localizacion"/></td></tr>
+			<tr><th>Irradiacion</th><td><input class="form-control" type="text" value=" "  name="irradiacion" id="irradiacion"/></td></tr>
+			<tr><th>Cambia de lugar</th><td><input class="form-control" type="text"  value=" " name="cambialugar" id="cambialugar"/></td></tr>
 			<tr><th>Relacion con tos</th>
 						<td>
-						<input type="radio" name="rbtos" value="si">Si</input>
-						<input type="radio" name="rbtos" value="no">No</input>
+						<input class="form-control" type="radio" name="rbtos" value="si">Si</input>
+						<input class="form-control" type="radio" name="rbtos" value="no">No</input>
 						</td>						
 		</table>
 		</div>
@@ -40,7 +40,7 @@ body {
 		<div class="col-md-5 col-md-offset-1">
 			<table class="table table-hover thead-light" border="1px">
 			<tr><th>Cronologia</th>
-				<td><select name="cronologia" id="cronologia">
+				<td><select class="form-control" name="cronologia" id="cronologia">
 						<option value="dias">Dias</option>
 						<option value="semanamas">Mas de una semana</option>
 						<option value="menosmes">Menos de un mes</option>
@@ -52,7 +52,7 @@ body {
 			<tr>
 				<th>Forma</th>
 				<td>
-					<select name="forma" id="forma">
+					<select class="form-control" name="forma" id="forma">
 						<option value="Constante">Constante</option>
 						<option value="Intermitente">Intermitente</option>
 					</select>
@@ -61,7 +61,7 @@ body {
 			<tr>
 				<th>Forma de Comienzo</th>
 				<td>
-					<select name="comienzo" id="comienzo">
+					<select class="form-control" name="comienzo" id="comienzo">
 						<option value="Agudo">Agudo</option>
 						<option value="Insidioso">Insidioso</option>
 					</select>
@@ -69,7 +69,7 @@ body {
 			</tr>
 			<tr><th>Impot. Func.</th>
 				<td>
-					<select name="impotencia" id="impotencia">
+					<select class="form-control"  name="impotencia" id="impotencia">
 						<option value="pequeña">Pequeña</option>
 						<option value="media">Media</option>
 						<option value="grande">Grande</option>
@@ -84,7 +84,7 @@ body {
 		<div class="col-md-11 col-md-offset-1">
 		<table class="table table-hover thead-light" border="0px">
 			<tr><th>Hora</th>
-				<td><select name="hora" id="hora" multiple>
+				<td><select class="form-control" name="hora" id="hora" multiple>
 						<option value="mañana">Mañana</option>
 						<option value="largodia">A lo largo del dia</option>
 						<option value="fintarde">Final de la tarde</option>
@@ -94,7 +94,7 @@ body {
 				</td>
 			</tr>
 			<tr><th>Factor desencadenate</th>
-				<td><select name="desencadenante" id="desencadenante" multiple>
+				<td><select class="form-control" name="desencadenante" id="desencadenante" multiple>
 						<option value="reposo">Reposo</option>
 						<option value="frio">Frio</option>
 						<option value="calor">Calor</option>
@@ -105,7 +105,7 @@ body {
 			</tr>
 			<tr><th>Intensidad</th>
 				<td>
-					<select name="inten" id="inten" multiple>
+					<select class="form-control" name="inten" id="inten" multiple>
 						<option value="leve">Leve</option>
 						<option value="moderado">Moderado</option>
 						<option value="punzante">Punzante</option>
@@ -119,7 +119,7 @@ body {
 			<tr>
 					<th>Aliviadores</th>
 					<td>
-						<select name="aliviadores" id="aliviadores" multiple>
+						<select class="form-control" name="aliviadores" id="aliviadores" multiple>
 							<option value="reposo">Reposo</option>
 							<option value="frio">Frio</option>
 							<option value="calor">Calor</option>
