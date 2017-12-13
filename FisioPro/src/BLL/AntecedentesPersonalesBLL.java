@@ -13,7 +13,7 @@ public class AntecedentesPersonalesBLL {
 	
 	
 	public AntecedentesPersonalesBLL() {
-		// TODO Auto-generated constructor stub
+		ap=new AntecedentesPersonales();
 	}
 	
 	public AntecedentesPersonalesBLL(String idcliente,
@@ -32,6 +32,11 @@ public class AntecedentesPersonalesBLL {
 		
 	}
 	
+	public AntecedentesPersonalesBLL(AntecedentesPersonales ap)
+	{
+		this.ap=new AntecedentesPersonales();
+		this.ap=ap;
+	}
 	/**
 	 * 
 	 * Metodo que nos realizara el alta, validaciones, llamada a dal y nos devuelve el id
@@ -48,6 +53,7 @@ public class AntecedentesPersonalesBLL {
 				 * Miramos los datos, si no hay porque se ha dejado el formulario vacio
 				 * se ponen por defecto ninguno.
 				 */
+				validarnulo();
 				validar();
 				
 				exito=apd.AltaAntecedente();
@@ -55,7 +61,7 @@ public class AntecedentesPersonalesBLL {
 		} catch (Exception e) {
 			// TODO: handle exception
 			exito=0;
-			System.err.println("Error en cliente.bll alta cliente" + e);
+			System.err.println("Error en Antecedentespersonales.bll altaantecedentes" + e);
 		}
 		
 		return exito;
@@ -88,6 +94,32 @@ public class AntecedentesPersonalesBLL {
 		
 	}
 
+	/**
+	 * Nos validara los datos del fomrmulario de alta antecedentes.
+	 * En caso de que se deje vacio ( porque rober no quiere rellenarlos ahora)
+	 * se pondra como valores por defecto ninguno
+	 * 	 */
+	public void validarnulo()
+	{
+		
+		if (Utilidades.EsNulo(ap.getEnfermedadesGraves()))
+				{
+			ap.setEnfermedadesGraves("Ninguna");
+				}
+		if (Utilidades.EsNulo(ap.getOperacionesQuirurjicas()))
+		{
+			ap.setOperacionesQuirurjicas("Ninguna");
+		}
+		if (Utilidades.EsNulo(ap.getTratamientoMedicoActual()))
+		{
+			ap.setTratamientoMedicoActual("Ninguno");
+		}
+		if (Utilidades.EsNulo(ap.getLesionesAntiguas()))
+		{
+			ap.setLesionesAntiguas("Ninguna");
+		}
+		
+	}
 	public AntecedentesPersonales RellenarAntecedentes (Cliente cli)
 	{
 		AntecedentesPersonales ap=new AntecedentesPersonales();
@@ -95,5 +127,21 @@ public class AntecedentesPersonalesBLL {
 		AntecedentesPersonalesDAL apdall=new AntecedentesPersonalesDAL(ap);
 		
 		return apdall.RellenarAntecedentes();
+	}
+
+	public int actualizarap()
+	{
+		AntecedentesPersonalesDAL apdal=new AntecedentesPersonalesDAL(ap);
+		validar();
+		return apdal.actualizarap();
+	}
+
+	/** Metodo para realizar el borrado de ap
+	 * @return Devuelve el numero de registros ap borrados
+	 */
+	public int eliminarantecedente() {
+		
+		AntecedentesPersonalesDAL apdal=new AntecedentesPersonalesDAL(ap);
+		return apdal.eliminarantecedente();
 	}
 }

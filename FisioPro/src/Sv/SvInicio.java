@@ -46,7 +46,8 @@ public class SvInicio extends HttpServlet {
 			else if (OPERACION.equalsIgnoreCase("recordar"))
 			{
 				
-			}else if (OPERACION.equalsIgnoreCase("inicio"))
+			}
+			else if (OPERACION.equalsIgnoreCase("inicio"))
 			{
 				request.getRequestDispatcher("WEB-INF/inicio.jsp").forward(request,response);
 			}

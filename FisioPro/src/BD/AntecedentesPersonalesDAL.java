@@ -149,6 +149,79 @@ public class AntecedentesPersonalesDAL {
 		
 		return ap;
 	}
+
+
+	
+	/** Metodo para modificar los valores de un antecedente personal
+	 * @return Devolvera 1 si se realizo el update 0 si no se realizo
+	 */
+	public int actualizarap() {
+		int insercion = 0;
+		c=new Conexion();
+		
+		/*
+		 * UPDATE `vipr_tantecedentes_personales` SET `oid_antecedentes_personales`=[value-1],
+		 * `oid_cliente`=[value-2],`des_eg`=[value-3],
+		 * `des_oq`=[value-4],`des_tma`=[value-5],`des_la`=[value-6] WHERE 1
+		 */
+		
+		String query="update vipr_tantecedentes_personales set"
+				+ "  des_eg  = ?"
+				+ ", des_oq  = ?"
+				+ ", des_tma = ?"
+				+ ", des_la  = ? "
+				+ "  where "
+				+ "  oid_cliente = ? ";
+		
+		try {
+			PreparedStatement psResulset = c.getConexion().prepareStatement(query);
+			// Este campo y el oid cliente son el mismo, cualquiera es la clave primaria
+			psResulset.setInt(5, ap.getOid_cliente());
+			psResulset.setString(1, ap.getEnfermedadesGraves());
+			psResulset.setString(2, ap.getOperacionesQuirurjicas());
+			psResulset.setString(3, ap.getTratamientoMedicoActual());
+			psResulset.setString(4, ap.getLesionesAntiguas());
+			insercion=psResulset.executeUpdate();
+						 
+		} catch (SQLException e) {
+			// TODO: handle exception
+			
+			System.err.println("error en buscar AntecedentesPersonales" + e);
+		}
+		finally {
+			c.cerrarConexion();
+		}
+		return insercion;
+	}
+
+
+	/**
+	 * Metodo que realiza la eliminación del antecedente personal al dar de baja un cliente.
+	 */
+	public int eliminarantecedente() {
+		int baja = 0;
+		c=new Conexion();
+		String query="DELETE FROM vipr_tantecedentes_personales  "
+				+ " where oid_cliente = ?";
+		
+		try {
+			PreparedStatement psResulset = c.getConexion().prepareStatement(query);
+
+			//where
+			psResulset.setInt(1, ap.getOid_cliente());
+			baja=psResulset.executeUpdate();
+						 
+		} catch (SQLException e) {
+			// TODO: handle exception
+			
+			System.err.println("error en buscar ApDAL.eliminarantecedente" + e);
+		}
+		finally {
+			c.cerrarConexion();
+		}
+		return baja;
+		
+	}
 	
 	
 	

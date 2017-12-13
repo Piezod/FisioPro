@@ -20,6 +20,7 @@ import Entidades.Usuario;
 @WebServlet("/SvMenu")
 public class SvMenu extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static String OPERACION ;
        
 
 	/**
@@ -36,18 +37,19 @@ public class SvMenu extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		OPERACION=request.getParameter("oper");
 		
-		if (request.getParameter("operacion").equalsIgnoreCase("alta"))
+		if (OPERACION.equalsIgnoreCase("alta"))
 				{
-						System.out.println("Voy a alta usuario.jsp desde sv menu");
+						System.out.println("Voy a alta cliente");
 						request.setAttribute("datos", "pantalla de alta usuario");
 						request.getRequestDispatcher("WEB-INF/AltaCliente/AltaCliente.jsp").forward(request,response);
 				}
-		else if (request.getParameter("operacion").equalsIgnoreCase("baja"))
+		else if (OPERACION.equalsIgnoreCase("baja"))
 		{
 			System.out.println("Voy a alta bajausuario.jsp");
 		}
-		else if (request.getParameter("operacion").equalsIgnoreCase("modificacion"))
+		else if (OPERACION.equalsIgnoreCase("modificacion"))
 
 		{
 			System.out.println("Voy a alta modificacionusuario.jsp");

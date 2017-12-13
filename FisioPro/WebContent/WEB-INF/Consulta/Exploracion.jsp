@@ -15,19 +15,19 @@
 		<table class="table table-hover thead-light" border="1px">
 			<tr>
 				<th>Inspeccion visual</th>
-				<td><input type="text" name="visual" id="visual"/></td>
+				<td><textarea class="form-control" cols="50" rows="4" type="text" name="visual" id="visual"></textarea></td>
 			</tr>
 			<tr>
 				<th>Palpacion</th>
-				<td><input type="text" name="palpacion" id="palpacion"/></td>
+				<td><textarea class="form-control" cols="50" rows="4" type="text" name="palpacion" id="palpacion"></textarea></td>
 			</tr>
 			<tr>
 				<th>Test de movilidad</th>
-				<td><input type="text" name="movilidad" id="movilidad"/></td>
+				<td><textarea class="form-control" cols="50" rows="4" type="text" name="movilidad" id="movilidad"></textarea></td>
 			</tr>
 			<tr>
 				<th>Test Ortopedico</th>
-				<td><input type="text" name="ortopedico" id="ortopedico"/></td>
+				<td><textarea class="form-control" cols="50" rows="4" type="text" name="ortopedico" id="ortopedico"></textarea></td>
 			</tr>		
 			<div class="col-md-4 col-md-offset-4">
 				<tr align="center"><td colspan="2"><button class="btn btn-success" type="submit" id="altaexploracion" name="oper" value="tratamiento">Siguiente</button></td></tr>

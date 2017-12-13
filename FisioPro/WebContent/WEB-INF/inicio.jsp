@@ -5,13 +5,42 @@
 
 <html lang="en">
 
+
 <%@ include file="/WEB-INF/Cabecera.jsp" %>
 <head>
+<title>FisioPro - Inicio</title>
 <style type="text/css">
 body {
     background-image: url("IMAGENES/Fondos/10.jpg");
     background-repeat: no-repeat;
 }
+<style>
+.modal-header {
+    padding:9px 15px;
+    border-bottom:1px solid #eee;
+    background-color: 	#00BFFF;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+ }
+ .modal-body {
+    padding:9px 15px;
+    border-bottom:3px solid #eee;
+    background-color:  #F5FFFA;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+ }
+ 
+ 
+
+</style>
 </style>
 <script >
 $(document).ready(function(){
@@ -58,9 +87,9 @@ function verconsultas(){
 <%@ include file="/WEB-INF/Modales/modalfallo.jsp" %>
 </c:if>
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
+<div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 250px; margin: 0 auto">
     <!-- Indicators -->
-    <ol class="carousel-indicators">
+    <ol class="carousel-indicators" style="color: red;">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
       <li data-target="#myCarousel" data-slide-to="1"></li>
       <li data-target="#myCarousel" data-slide-to="2"></li>
@@ -69,22 +98,22 @@ function verconsultas(){
     <!-- Wrapper for slides imagenes tamaño 1200 x 400 -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-        <img src="IMAGENES/manodoctorslider.jpg"alt="Image"/>
+        <img src="IMAGENES/manodoctorslider.jpg"alt="Image" style="height: 250px; margin: 0 auto"/>
         <div class="carousel-caption">
           <h3 style="color: black">Te ayudamos en todo momento</h3>
         </div>      
       </div>
 
       <div class="item">
-        <img src="IMAGENES/manomasaje.jpg"/>
+        <img src="IMAGENES/manomasaje.jpg" style="height: 250px; margin: 0 auto"/>
         <div class="carousel-caption">
           <h3>Profesionales</h3>
           <p>Que se preocupan por tu bien estar</p>
         </div>      
       </div>
       
-            <div class="item">
-        <img src="IMAGENES/electroestimulacion.jpg"alt="Image"/>
+      <div class="item">
+        <img src="IMAGENES/electroestimulacion250.png"alt="Image" style="height: 250px; margin: 0 auto"/>
         <div class="carousel-caption">
           <h3>Las mejores tecnicas</h3>
           <p>Electroestimulacion,moxa,ventosas y muchas cosas mas</p>
@@ -110,9 +139,9 @@ function verconsultas(){
   <fmt:formatDate pattern = "dd-MM-yyyy" value = "${now}" />
   <div class="row">
     <div class="col-sm-4">
-    <!-- Imagenes 150x80 -->
-      <img src="" class="img-responsive" style="width:100%" alt="Image">
-      <p>Current Project</p>
+   	 <div id="c_e073ef80e7f1f458356294ac275c55b3" class="normal">
+   	 </div>
+   	 
     </div>
     <div class="col-sm-4"> 
       <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
@@ -147,4 +176,5 @@ function verconsultas(){
   <p id="datoajaxrecogido"></p>
 </footer>
 </body>
+<script type="text/javascript" src="https://www.eltiempo.es/widget/widget_loader/e073ef80e7f1f458356294ac275c55b3"></script>
 </html>

@@ -23,9 +23,7 @@
   <img id="404" class="img-responsive" src="IMAGENES/error500.gif" alt="Error 404" width="100%" height="100%"/> 
 <p> asdf
 <%@ page errorPage="true" %>
-<% 
-	Exception exception=new Exception();
-    exception.printStackTrace(response.getWriter()); %>
+
 </p>
 </body>
 </html>

@@ -6,14 +6,14 @@ public class Conexion {
 	private Connection conexion=null;
    
 	//Conexion a hostinger funcionando.
-	private String servidor="sql139.main-hosting.eu";
+	/*private String servidor="sql139.main-hosting.eu";
     private String database="u222872483_java";
     private String usuario="u222872483_java";
     private String password="123456";
-    private String url="";
+    private String url="";*/
  
     
-    /*private String servidor="localhost";
+    private String servidor="localhost";
     private String database="u222872483_java";
     private String usuario="root";
     private String password="123456";
