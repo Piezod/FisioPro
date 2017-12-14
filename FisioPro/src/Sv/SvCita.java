@@ -74,8 +74,18 @@ public class SvCita extends SvBase {
 							cita.setOid_cliente(Integer.parseInt(request.getParameter("oid_cliente")));
 							System.out.println(cita.toString());
 							response.getWriter().print(CrearCita(cita));
+						}else if (OPERACION.equalsIgnoreCase("citashoy"))
+						{
+							String json = new Gson().toJson(citasparahoy());							
+						    response.setContentType("application/json");
+						    response.setCharacterEncoding("UTF-8");
+						    response.getWriter().print(json);
+						}else if (OPERACION.equalsIgnoreCase("cancelarcita"))
+						{
+							Cita cita=new Cita();
+							cita.setOid_cita(Integer.parseInt(request.getParameter("oid_cita")));						
+						    response.getWriter().print(cancelarcita(cita));
 						}
-						
 						
 					} catch (Exception e) {
 						request.getRequestDispatcher("WEB-INF/error.jsp").forward(request,response);
@@ -120,5 +130,25 @@ public class SvCita extends SvBase {
 		CitaBLL citabll=new CitaBLL(cita);
 		citabll.CrearCita();
 		return 1;
+	}
+	
+	/** Metodo para ver las citas de hoy
+	 * @return lista tipo detallecita con las citas del dia de hoy
+	 */
+	public List<DetalleCita> citasparahoy()
+	{
+		
+		CitaBLL citabll=new CitaBLL();
+		return citabll.citasparahoy();
+	}
+
+	/** Metodo que hace la cancelacion de la cita
+	 * @param cita objeto cita que con el id que hay que cancelar
+	 * @return devolvera un 1 si se ha cancelado la cita o 0 si se ha producido algun error
+	 */
+	public int cancelarcita(Cita cita)
+	{
+		CitaBLL citabll=new CitaBLL(cita);
+		return citabll.cancelarcita();
 	}
 }

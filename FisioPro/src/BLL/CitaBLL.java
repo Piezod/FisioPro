@@ -1,7 +1,10 @@
 package BLL;
 
+import java.util.List;
+
 import BD.CitaDAL;
 import Entidades.Cita;
+import Entidades.DetalleCita;
 
 public class CitaBLL {
 
@@ -11,6 +14,12 @@ public class CitaBLL {
 	this.cita=new Cita();
 	this.cita=cita;
 	}
+	
+	public CitaBLL()
+	{
+		
+	}
+	
 	
 public int CrearCita()
 {
@@ -30,5 +39,20 @@ public boolean AlgunValorVacio()
 		return false;
 	}
 	else return true;
+}
+
+public List<DetalleCita> citasparahoy()
+{
+	DetalleCita dc=new DetalleCita();
+	CitaDAL citadal=new CitaDAL();
+	
+	return citadal.citasparahoy();
+	
+}
+
+public int cancelarcita() {
+	
+	CitaDAL citadal=new CitaDAL(cita);
+	return citadal.cancelarcita();
 }
 }

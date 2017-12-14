@@ -37,21 +37,13 @@ body {
      border-top-left-radius: 5px;
      border-top-right-radius: 5px;
  }
- 
- 
-
 </style>
 </style>
 <script >
 $(document).ready(function(){
     console.log( "ready!" );
-    $('#modalexito').modal('show');    
-    
+    $('#modalexito').modal('show');        
 });
-
-
-
-
 function verconsultas(){
 	
 	var oper="listaconsultas";
@@ -135,46 +127,159 @@ function verconsultas(){
 
 <div class="container text-center">    
 
-  <h3>Consultas para el dia de hoy : <fmt:formatDate pattern = "dd-MM-yyyy" value = "${now}" /></h3><br>
+  <h3>Consultas para el dia de hoy : <fmt:formatDate pattern = "dd-MM-yyyy" value = "${now}" /> 
+  
+  </h3><br>
   <fmt:formatDate pattern = "dd-MM-yyyy" value = "${now}" />
-  <div class="row">
-    <div class="col-sm-4">
-   	 <div id="c_e073ef80e7f1f458356294ac275c55b3" class="normal">
-   	 </div>
-   	 
+	  <div class="row">
+	    <div class="col-sm-4 col-xs-1">
+	   	 <div id="c_e073ef80e7f1f458356294ac275c55b3" class="normal">
+	   	 </div>
+	    </div>
+	    <div class="col-sm-6 col-xs-6">   
+	    	
+	    	<div id="citashoy">
+	    	
+	    	</div>
+	    </div>
+	    <div class="col-sm-1 col-xs-1">
+	    <div id="refrescarcitashoy"><span class="glyphicon glyphicon-refresh"></span></div> 
+	    </div>
+	  </div>
     </div>
-    <div class="col-sm-4"> 
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-      <p>Project 2</p>    
-    </div>
-    <div class="col-sm-4">
 
-      <div class="well"><span id="vertabla" class="glyphicon glyphicon-refresh"></span>
-       <div id="tablaconsultas">
-    <table>
-        <c:forEach items="${consul}" var="consultas">
-            <tr>
-                <td>${consul}</td>
-            </tr>
-        </c:forEach>
-    </table>
-       </div>
-      </div>
-      
-      <div class="well"><span id="relista" class="glyphicon glyphicon-refresh"></span>
-       <div id="listado">
-       </div>
-      </div>
-    </div>
-  </div>
-</div>
 <br>
 
 <footer class="container-fluid text-center">
   <p>FisioPro Aplicación realizada por JuanKar 2017 </p>
-  <p id="ajaxstring"> recoger dato de ajax string </p>
-  <p id="datoajaxrecogido"></p>
 </footer>
 </body>
 <script type="text/javascript" src="https://www.eltiempo.es/widget/widget_loader/e073ef80e7f1f458356294ac275c55b3"></script>
+<script type="text/javascript">
+<!-- Evento Recargar Las Citas para Hoy -->
+$( document ).ready(function() {
+    console.log( "ready!" );
+    CitasHoy();
+    
+    $("#refrescarcitashoy").click(function() {
+		console.log("Click recargarhoy");
+		CitasHoy();
+	});
+});
+
+function CitasHoy(){  
+	console.log("Buscando  citas para hoy");
+	
+	var parametros = {
+			oper : "citashoy"			
+	}
+	console.log(parametros.oper);
+	
+    $.ajax({
+            data:  parametros,
+            url:   'SvCita',
+            type:  'POST',
+            beforeSend: function () {
+            	//$("#citashoy").html('<img src="IMAGENES/ajaxloader.gif" alt="imagenloading...."/>');
+            	//$('#modalnotificacion').modal('show');
+            },
+            success:  function (response) {
+            	
+            	if (response.length>0)
+            		{
+            	console.log(response);
+            	console.log("respuesta "+response+ "nombre "+response.nombre+" horario "+response.des_horario);  
+            	console.log(response["nombre"]);
+            	console.log("asfd"+response[0]);
+            	console.log("fff"+response[0].nombre);
+            	// create table
+            	var table = $('<table id="citashoy" border="1" class="table table-striped" ></table>');      
+            	// Iterate over the JSON array.
+            	            	var row = $("<tr></tr>");
+            	  row.append($("<th> Nombre </th>"));
+            	  row.append($("<th> Apellido </th>"));
+            	  row.append($("<th> Horario</th>"));            	  
+            	  table.append(row);
+                $.each(response, function(index, item) { 
+                	console.log(index.item);
+            	  var row1 = $('<tr onClick="confirmarcancelarcita('+item.oid_cita+","+item.oid_cliente+');"></tr>');
+            	  row1.append($("<td></td>").html(item.nombre));
+            	  row1.append($("<td></td>").html(item.apellido1));
+            	  row1.append($("<td></td>").html(item.des_horario));
+            	  table.append(row1);
+                });
+				console.log(table);
+           	//Reemplazo el anterior contenido por el nuevo, ais no se concatena
+           	//Importante que claro lo pongo en infotabla, con lo que mi tabla nueva tiene que tener la misma id
+           	//Si no, no lo pongo en ningun lado y dejaria de funcionar.
+            	$("#citashoy").replaceWith(table);
+            		}
+            	else
+            		{
+            		var table = $('<table id="citashoy" border="1" class="table table-striped" ></table>');      
+                	var row = $("<tr></tr>");
+                	  row.append($("<th> No hay citas </th>"));          	  
+                	  table.append(row);
+    				console.log(table);
+                	$("#citashoy").replaceWith(table);
+            		}
+            }
+    });
+};
+
+function abrirconsulta(oid_cliente) {
+	console.log("abro el perfil para el chatin numero "+oid_cliente);
+    url = "SvConsultaCliente?oper=perfil&oid="+oid_cliente;
+    $(location).attr("href", url);
+}
+
+function confirmarcancelarcita(oid_cita,oid_cliente)
+{
+	console.log(oid_cita,oid_cliente);
+	
+
+	//Ingresamos un mensaje a mostrar
+	var mensaje = confirm("¿Quieres crear la consulta de esta cita?");
+	//Detectamos si el usuario acepto el mensaje
+	if (mensaje) {
+	alert("si ");
+	cancelarcita(oid_cita,oid_cliente);
+	}
+	//Detectamos si el usuario denegó el mensaje
+	else {
+	alert("Cancelamos seguimos todo igual");
+	}
+}
+
+function cancelarcita(oid_cita,oid_cliente){  
+	console.log("Cancelando cita porque se pasa a consulta");
+	
+	var parametros = {
+			oper : "cancelarcita"		,
+			oid_cita : oid_cita
+	}
+	console.log(parametros.oper);
+	
+    $.ajax({
+            data:  parametros,
+            url:   'SvCita',
+            type:  'POST',
+            beforeSend: function () {
+            	//$("#citashoy").html('<img src="IMAGENES/ajaxloader.gif" alt="imagenloading...."/>');
+            	//$('#modalnotificacion').modal('show');
+            },
+            success:  function (response) {
+            	
+            	if (response.length>0)
+            		{
+            		 abrirconsulta(oid_cliente);
+            		}
+            	else
+            		{
+						console.log("no se pudo hacer la cancelacion cita");
+            		}
+            }
+    });
+};
+</script>
 </html>
