@@ -3,7 +3,7 @@
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<html lang="en">
+<html>
 
 
 <%@ include file="/WEB-INF/Cabecera.jsp" %>
@@ -14,7 +14,7 @@ body {
     background-image: url("IMAGENES/Fondos/10.jpg");
     background-repeat: no-repeat;
 }
-<style>
+
 .modal-header {
     padding:9px 15px;
     border-bottom:1px solid #eee;
@@ -38,6 +38,25 @@ body {
      border-top-right-radius: 5px;
  }
 </style>
+<style>
+
+<!-- Esto me centra el modal -->
+
+
+@media screen and (min-width: 768px) { 
+  #modalespera:before {
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+
+#modalespera {
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 15%;
+  margin-left: 15%;
+}
 </style>
 <script >
 $(document).ready(function(){
@@ -69,7 +88,7 @@ function verconsultas(){
 
 
 </script>
-
+<link href="css/tabla.css"   rel="stylesheet" type="text/css">
 </head>
 <body>
 <c:if test="${exito > 0 }">
@@ -132,14 +151,11 @@ function verconsultas(){
   </h3><br>
   <fmt:formatDate pattern = "dd-MM-yyyy" value = "${now}" />
 	  <div class="row">
-	    <div class="col-sm-4 col-xs-1">
-	   	 <div id="c_e073ef80e7f1f458356294ac275c55b3" class="normal">
-	   	 </div>
 	    </div>
-	    <div class="col-sm-6 col-xs-6">   
+	    <div class="col-sm-10 col-xs-10">   
 	    	
 	    	<div id="citashoy">
-	    	
+	    		
 	    	</div>
 	    </div>
 	    <div class="col-sm-1 col-xs-1">
@@ -147,14 +163,13 @@ function verconsultas(){
 	    </div>
 	  </div>
     </div>
-
-<br>
-
-<footer class="container-fluid text-center">
-  <p>FisioPro Aplicación realizada por JuanKar 2017 </p>
-</footer>
+    <!-- Modal Espera Ajax -->
+<div id="modalespera" class="modal fade" role="dialog" style="margin-top: 30px">
+  <img align="middle" src="IMAGENES/ajaxtriangulos.gif" alt="imagenloading...."/>
+</div>
 </body>
-<script type="text/javascript" src="https://www.eltiempo.es/widget/widget_loader/e073ef80e7f1f458356294ac275c55b3"></script>
+</div>
+
 <script type="text/javascript">
 <!-- Evento Recargar Las Citas para Hoy -->
 $( document ).ready(function() {
@@ -180,7 +195,7 @@ function CitasHoy(){
             url:   'SvCita',
             type:  'POST',
             beforeSend: function () {
-            	//$("#citashoy").html('<img src="IMAGENES/ajaxloader.gif" alt="imagenloading...."/>');
+            	$("#citashoy").html('<img src="IMAGENES/ajaxtriangulos.gif" alt="imagenloading...."/>');
             	//$('#modalnotificacion').modal('show');
             },
             success:  function (response) {
@@ -188,14 +203,11 @@ function CitasHoy(){
             	if (response.length>0)
             		{
             	console.log(response);
-            	console.log("respuesta "+response+ "nombre "+response.nombre+" horario "+response.des_horario);  
-            	console.log(response["nombre"]);
-            	console.log("asfd"+response[0]);
             	console.log("fff"+response[0].nombre);
             	// create table
-            	var table = $('<table id="citashoy" border="1" class="table table-striped" ></table>');      
+            	var table = $('<table id="citashoy" border="1" class="blueTable" ></table>');      
             	// Iterate over the JSON array.
-            	            	var row = $("<tr></tr>");
+            	            	var row = $("<thead><tr></tr></thead>");
             	  row.append($("<th> Nombre </th>"));
             	  row.append($("<th> Apellido </th>"));
             	  row.append($("<th> Horario</th>"));            	  
@@ -207,7 +219,7 @@ function CitasHoy(){
             	  row1.append($("<td></td>").html(item.apellido1));
             	  row1.append($("<td></td>").html(item.des_horario));
             	  table.append(row1);
-                });
+                });             
 				console.log(table);
            	//Reemplazo el anterior contenido por el nuevo, ais no se concatena
            	//Importante que claro lo pongo en infotabla, con lo que mi tabla nueva tiene que tener la misma id
@@ -217,7 +229,7 @@ function CitasHoy(){
             	else
             		{
             		var table = $('<table id="citashoy" border="1" class="table table-striped" ></table>');      
-                	var row = $("<tr></tr>");
+                	var row = $("<thead><tr></tr></thead>");
                 	  row.append($("<th> No hay citas </th>"));          	  
                 	  table.append(row);
     				console.log(table);
@@ -242,7 +254,6 @@ function confirmarcancelarcita(oid_cita,oid_cliente)
 	var mensaje = confirm("¿Quieres crear la consulta de esta cita?");
 	//Detectamos si el usuario acepto el mensaje
 	if (mensaje) {
-	alert("si ");
 	cancelarcita(oid_cita,oid_cliente);
 	}
 	//Detectamos si el usuario denegó el mensaje
@@ -265,11 +276,10 @@ function cancelarcita(oid_cita,oid_cliente){
             url:   'SvCita',
             type:  'POST',
             beforeSend: function () {
-            	//$("#citashoy").html('<img src="IMAGENES/ajaxloader.gif" alt="imagenloading...."/>');
-            	//$('#modalnotificacion').modal('show');
+				$("#modalespera").modal('show');
             },
             success:  function (response) {
-            	
+            	$("#modalespera").modal('hide');
             	if (response.length>0)
             		{
             		 abrirconsulta(oid_cliente);

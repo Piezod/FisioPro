@@ -18,8 +18,7 @@ public class HorariosDAL {
 					+ " from vipr_thorario "
 					+ "where oid_horario not in "
 					+ "         (Select oid_horario from vipr_tcita as cita "
-					+ "          where fecha like '"+fecha+"')";
-					
+					+ "          where fecha like '"+fecha+"' and bol_activa = 1)";					
 			List<Horarios> listahorariosdisponibles=new ArrayList<>();
 			try {
 				ResultSet rs=c.getstm().executeQuery(query);

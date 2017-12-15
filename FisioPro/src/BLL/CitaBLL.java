@@ -41,6 +41,9 @@ public boolean AlgunValorVacio()
 	else return true;
 }
 
+/** Ver citas para hoy
+ * @return Devuelve una lista con las citas activas en el dia de hoy
+ */
 public List<DetalleCita> citasparahoy()
 {
 	DetalleCita dc=new DetalleCita();
@@ -50,9 +53,24 @@ public List<DetalleCita> citasparahoy()
 	
 }
 
+/** Metodo para cancelar la cita segun la id recogida en el objeto cita
+ * @return
+ */
 public int cancelarcita() {
 	
 	CitaDAL citadal=new CitaDAL(cita);
 	return citadal.cancelarcita();
+}
+
+
+/** Metodo para devolver una lista con el detalle de celdas de una fecha en concreta
+ * @return
+ */
+public List<DetalleCita> listacitasfecha(String fecha) {
+	
+	DetalleCita dc=new DetalleCita();
+	CitaDAL citadal=new CitaDAL();
+	
+	return citadal.listacitasfecha(fecha);
 }
 }

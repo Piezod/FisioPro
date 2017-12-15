@@ -133,6 +133,10 @@ public class SvCliente extends HttpServlet {
 				
 				response.getWriter().print("cliente : "+actualizarcliente(cli,ap));;
 						
+			}else
+			{
+				System.out.println("no existe ese jsp");
+				request.getRequestDispatcher("inicio.jsp").forward(request,response);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

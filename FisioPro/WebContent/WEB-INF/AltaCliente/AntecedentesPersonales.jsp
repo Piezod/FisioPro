@@ -30,7 +30,7 @@ body
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
 	 <div class="panel panel-primary" style="margin-top: 25%">
-      <div class="panel-heading"><h1 align="center">Antecedentes Personales del cliente nº <c:out value="${idcliente}" /> </h1></div>
+      <div class="panel-heading"><h1 align="center">Antecedentes Personales</h1></div>
       	<div class="panel-body">
 				<table class="table table-hover thead-light" border="1px">
 					<form action="SvCliente" method="post">

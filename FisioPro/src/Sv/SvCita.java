@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 
 import BLL.CitaBLL;
 import BLL.ClienteBLL;
@@ -85,6 +86,27 @@ public class SvCita extends SvBase {
 							Cita cita=new Cita();
 							cita.setOid_cita(Integer.parseInt(request.getParameter("oid_cita")));						
 						    response.getWriter().print(cancelarcita(cita));
+						}else if(OPERACION.equalsIgnoreCase("cancecita"))
+						{							
+							System.out.println("pagina cancelar cita");
+							request.setAttribute("fechahoy", fechahoy());	
+							System.out.println(fechahoy());
+							//Le paso esta fecha para que si o si, el calendario me deje seleccionar fechas de hoy en futuro
+							request.getRequestDispatcher("WEB-INF/GestionCitas/CancelarCita.jsp").forward(request,response);
+						}else if (OPERACION.equalsIgnoreCase("VerCitasFecha"))
+						{
+							
+							
+							 String json = new Gson().toJson(listacitasfecha(request.getParameter("fecha")));
+							 System.out.println("Devuelvo json de citas segun fecha "+json);
+							    response.setContentType("application/json");
+							    response.setCharacterEncoding("UTF-8");
+							    response.getWriter().write(json);
+						}						
+						else
+						{
+							System.out.println("no existe ese jsp");
+							request.getRequestDispatcher("inicio.jsp").forward(request,response);
 						}
 						
 					} catch (Exception e) {
@@ -93,6 +115,12 @@ public class SvCita extends SvBase {
 		
 	}
 	
+	private List<DetalleCita> listacitasfecha(String fecha) {
+
+		CitaBLL citabll=new CitaBLL();
+		return citabll.listacitasfecha(fecha);
+	}
+
 	public List<Horarios> horariosdisponibles(String fecha) throws SQLException
 	{
 		HorariosBLL hbll=new HorariosBLL();

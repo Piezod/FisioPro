@@ -71,6 +71,10 @@ public class SvConsultaCliente extends HttpServlet {
 				request.setAttribute("antecedentes", buscarantecedentes(cli));
 				request.getRequestDispatcher("WEB-INF/Cliente/PerfilCliente.jsp").forward(request,response);
 
+			}else
+			{
+				System.out.println("no existe ese jsp");
+				request.getRequestDispatcher("inicio.jsp").forward(request,response);
 			}
 			
 		} catch (Exception e) {

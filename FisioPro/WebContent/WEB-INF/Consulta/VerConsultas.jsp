@@ -8,14 +8,25 @@
 <title>FisioPro - Consultas</title>
 
 <%@ include file="/WEB-INF/Cabecera.jsp" %>
+<STYLE>
+body
+{
+    background: url('IMAGENES/Fondos/fondoazul1.jpg') fixed;
+    background-size: cover;
+    padding: 0;
+    margin: 0;
+    opacity: 0.8;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+</STYLE>
 </head>
 <body>
 
 <div class="container">
 
-<h1 align="center">Ver Consultas EN PROCESO</h1>
-<div class="row">
-		<div class="col-md-4 col-md-offset-4">
+<h1 style="margin-top: 25%" align="center">Ver Consultas , seleccione un cliente</h1>
+<div class="row" >
+		<div class="col-md-6 col-md-offset-2 col-xs-12">
 		<table>
 			<form method="post" action="SvVerConsultas">
 				<tr>
@@ -23,8 +34,7 @@
 					<td>
 						<select name="oid_cliente">
 							<c:forEach var="item"  items="${listacliente}" varStatus="loop">
-									<option  value="${item.oid}">
-										<c:out value="${item.oid}"></c:out>
+									<option  value="${item.oid}">										
 										<c:out value="${item.nombre}"></c:out>
 										<c:out value="${item.apellido1}"></c:out>
 										<c:out value="${item.apellido2}"></c:out>							

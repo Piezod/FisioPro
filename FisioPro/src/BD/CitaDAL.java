@@ -85,7 +85,7 @@ public class CitaDAL {
 				"  \r\n" + 
 				"  GROUP by vipr_tcita.oid_cliente) as VecesCita " +  
 				"from vipr_tcita\r\n" + 
-				"INNER JOIN tcliente on tcliente.oid_cliente = vipr_tcita.oid_cita\r\n" + 
+				"INNER JOIN tcliente on tcliente.oid_cliente = vipr_tcita.oid_cliente\r\n" + 
 				"INNER join vipr_thorario on vipr_thorario.oid_horario= vipr_tcita.oid_horario\r\n" + 
 				"where fecha like '"+fechahoy+"'"
 				+ "and vipr_tcita.bol_activa = 1";
@@ -147,5 +147,59 @@ public class CitaDAL {
 			c.cerrarConexion();
 		}
 		return insercion;
+	}
+	/** Ver citas de un dia en concreto
+	 * @param fecha la fecha que queremos ver las citas
+	 * @return lista con las citas de una fecha en concreto
+	 */
+	public List<DetalleCita> listacitasfecha(String fecha) {
+		List<DetalleCita> listacita=new ArrayList<>();
+		
+		c=new Conexion();
+		
+		System.out.print("Ver consultas de la fecha :"+fecha);
+		
+		String query="select tcliente.des_nombre\r\n" + 
+				",tcliente.des_apellido1\r\n" + 
+				",tcliente.des_apellido2\r\n" + 
+				",vipr_thorario.des_horario\r\n" + 
+				",vipr_tcita.oid_cita \r\n"
+				+ ", vipr_tcita.oid_cliente"
+				+ ",(SELECT COUNT(1) from vipr_tcita where tcliente.oid_cliente = vipr_tcita.oid_cliente\r\n" + 
+				"  AND vipr_tcita.fecha < '"+fecha+"'\r\n" + 
+				"  \r\n" + 
+				"  GROUP by vipr_tcita.oid_cliente) as VecesCita " +  
+				"from vipr_tcita\r\n" + 
+				"INNER JOIN tcliente on tcliente.oid_cliente = vipr_tcita.oid_cliente\r\n" + 
+				"INNER join vipr_thorario on vipr_thorario.oid_horario= vipr_tcita.oid_horario\r\n" + 
+				"where fecha like '"+fecha+"'"
+				+ "and vipr_tcita.bol_activa = 1";
+				
+		try {
+			
+			ResultSet rs=c.getstm().executeQuery(query);
+			while (rs.next())
+			{
+				DetalleCita dc=new DetalleCita();
+				dc.setNombre(rs.getString(1));
+				dc.setApellido1(rs.getString(2));
+				dc.setApellido2(rs.getString(3));
+				dc.setDes_horario(rs.getString(4));				
+				dc.setOid_cita(rs.getInt(5));
+				dc.setOid_cliente(rs.getInt(6));
+				dc.setNumerocitas(rs.getInt(7));
+				listacita.add(dc);
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+			System.err.println("error en buscar Consultadal.listacitasfecha "+ e.getLocalizedMessage() );
+		}
+		finally {
+			c.cerrarConexion();
+		}
+		
+		return listacita;
 	}
 }
