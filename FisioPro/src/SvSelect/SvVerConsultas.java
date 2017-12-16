@@ -79,6 +79,10 @@ public class SvVerConsultas extends SvBase {
 			    response.setCharacterEncoding("UTF-8");
 			    System.out.println("Devolviendo el objeto a json"+json);
 			    response.getWriter().write(json);
+		}else
+		{
+			System.out.println("no existe ese jsp");
+			request.getRequestDispatcher("inicio.jsp").forward(request,response);
 		}
 	}
 	

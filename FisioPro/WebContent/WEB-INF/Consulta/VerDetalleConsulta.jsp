@@ -43,11 +43,11 @@ td
     									<span class="glyphicon glyphicon-folder-open"></span> 
  									 </a>
  								</td>		
- 																<td> <a href="#" class="btn btn-info btn-md" onClick="AbrirExploracion('${item.oid_exploración}');">
+ 								<td> <a href="#" class="btn btn-info btn-md" onClick="AbrirExploracion('${item.oid_exploración}');">
     									<span class="glyphicon glyphicon-folder-open"></span> 
  									 </a>
  								</td>	
- 																<td> <a href="#" class="btn btn-success btn-md" onClick="AbrirTratamiento('${item.oid_tratamiento}');">
+ 								 <td> <a href="#" class="btn btn-success btn-md" onClick="AbrirTratamiento('${item.oid_tratamiento}');">
     									<span class="glyphicon glyphicon-folder-open"></span> 
  									 </a>
  								</td>						
@@ -55,12 +55,9 @@ td
 				</c:forEach>
 </table>
 </body>
-
-
 <!-- Modal -->
 <div id="infoformulario" class="modal fade" role="dialog">
   <div class="modal-dialog">
-
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">

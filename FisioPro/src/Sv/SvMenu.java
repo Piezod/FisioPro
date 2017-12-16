@@ -53,6 +53,10 @@ public class SvMenu extends HttpServlet {
 
 		{
 			System.out.println("Voy a alta modificacionusuario.jsp");
+		}else
+		{
+			System.out.println("no existe ese jsp");
+			request.getRequestDispatcher("inicio.jsp").forward(request,response);
 		}
 	}
 	

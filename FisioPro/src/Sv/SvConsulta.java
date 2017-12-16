@@ -132,6 +132,10 @@ public class SvConsulta extends HttpServlet {
 				request.setAttribute("tipo",mensaje);
 				request.getRequestDispatcher("/WEB-INF/inicio.jsp").forward(request,response);
 			}
+		}else
+		{
+			System.out.println("no existe ese jsp");
+			request.getRequestDispatcher("inicio.jsp").forward(request,response);
 		}
 			
 

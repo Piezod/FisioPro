@@ -63,7 +63,7 @@
 	     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Citas<span class="caret"></span></a>
 		        <ul class="dropdown-menu">
 		          <li><a href="SvCita?oper=alta">Alta Cita</a></li>
-		          <li><a href="SvCita?oper=cancelacion">Cancelar Cita</a></li>
+		          <li><a href="SvCita?oper=cancecita">Cancelar Cita</a></li>
 		        </ul>
 	      </li>
         <li><a href="SvOtros?oper=contact">Contact</a></li>
@@ -71,6 +71,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="Login.jsp"><span class="glyphicon glyphicon-log-in"></span> Salir</a></li>
       </ul>
+      <div id="c_e504312712c995b49677d2f3af471e27" class="mini"/>
     </div>
   </div>
 </nav>

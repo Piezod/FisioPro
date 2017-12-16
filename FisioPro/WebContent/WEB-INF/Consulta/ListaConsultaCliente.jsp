@@ -4,6 +4,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<STYLE>
+body
+{
+    background: url('IMAGENES/Fondos/fondoazul1.jpg') fixed;
+    background-size: cover;
+    padding: 0;
+    margin: 0;
+    opacity: 0.8;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+</STYLE>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>FisioPro - Buscar Cliente</title>
 

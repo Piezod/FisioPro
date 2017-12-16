@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 
 import BLL.CitaBLL;
 import BLL.ClienteBLL;
@@ -74,8 +75,39 @@ public class SvCita extends SvBase {
 							cita.setOid_cliente(Integer.parseInt(request.getParameter("oid_cliente")));
 							System.out.println(cita.toString());
 							response.getWriter().print(CrearCita(cita));
+						}else if (OPERACION.equalsIgnoreCase("citashoy"))
+						{
+							String json = new Gson().toJson(citasparahoy());							
+						    response.setContentType("application/json");
+						    response.setCharacterEncoding("UTF-8");
+						    response.getWriter().print(json);
+						}else if (OPERACION.equalsIgnoreCase("cancelarcita"))
+						{
+							Cita cita=new Cita();
+							cita.setOid_cita(Integer.parseInt(request.getParameter("oid_cita")));						
+						    response.getWriter().print(cancelarcita(cita));
+						}else if(OPERACION.equalsIgnoreCase("cancecita"))
+						{							
+							System.out.println("pagina cancelar cita");
+							request.setAttribute("fechahoy", fechahoy());	
+							System.out.println(fechahoy());
+							//Le paso esta fecha para que si o si, el calendario me deje seleccionar fechas de hoy en futuro
+							request.getRequestDispatcher("WEB-INF/GestionCitas/CancelarCita.jsp").forward(request,response);
+						}else if (OPERACION.equalsIgnoreCase("VerCitasFecha"))
+						{
+							
+							
+							 String json = new Gson().toJson(listacitasfecha(request.getParameter("fecha")));
+							 System.out.println("Devuelvo json de citas segun fecha "+json);
+							    response.setContentType("application/json");
+							    response.setCharacterEncoding("UTF-8");
+							    response.getWriter().write(json);
+						}						
+						else
+						{
+							System.out.println("no existe ese jsp");
+							request.getRequestDispatcher("inicio.jsp").forward(request,response);
 						}
-						
 						
 					} catch (Exception e) {
 						request.getRequestDispatcher("WEB-INF/error.jsp").forward(request,response);
@@ -83,6 +115,12 @@ public class SvCita extends SvBase {
 		
 	}
 	
+	private List<DetalleCita> listacitasfecha(String fecha) {
+
+		CitaBLL citabll=new CitaBLL();
+		return citabll.listacitasfecha(fecha);
+	}
+
 	public List<Horarios> horariosdisponibles(String fecha) throws SQLException
 	{
 		HorariosBLL hbll=new HorariosBLL();
@@ -120,5 +158,25 @@ public class SvCita extends SvBase {
 		CitaBLL citabll=new CitaBLL(cita);
 		citabll.CrearCita();
 		return 1;
+	}
+	
+	/** Metodo para ver las citas de hoy
+	 * @return lista tipo detallecita con las citas del dia de hoy
+	 */
+	public List<DetalleCita> citasparahoy()
+	{
+		
+		CitaBLL citabll=new CitaBLL();
+		return citabll.citasparahoy();
+	}
+
+	/** Metodo que hace la cancelacion de la cita
+	 * @param cita objeto cita que con el id que hay que cancelar
+	 * @return devolvera un 1 si se ha cancelado la cita o 0 si se ha producido algun error
+	 */
+	public int cancelarcita(Cita cita)
+	{
+		CitaBLL citabll=new CitaBLL(cita);
+		return citabll.cancelarcita();
 	}
 }

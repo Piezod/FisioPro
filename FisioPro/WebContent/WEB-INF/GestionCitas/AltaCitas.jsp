@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>FisioPro - Alta Citas</title>
+<link href="css/modal1.css"   rel="stylesheet" type="text/css">
 </head>
 <style>
 
@@ -72,6 +73,7 @@ body
 <script type="text/javascript">
 
 function verhorarios(fecha){
+	$("#cbhorario").show();
 	var parametros = {
             "oper" : "verhorariodisponibles",
             "fecha" : fecha
@@ -83,7 +85,7 @@ function verhorarios(fecha){
             url:   'SvCita',
             type:  'POST',
             beforeSend: function () {
-            	$("#cbhorario").replaceWith('<div id="cbhorario"><p>Recargando horarios ...<img src="IMAGENES/ajaxloader.gif" alt="imagenloading...."/></p></div>');
+            	$("#cbhorario").replaceWith('<div id="cbhorario"><p>Recargando horarios ...<img src="IMAGENES/ajaxtriangulos.gif" width="50px" height="50px" alt="imagenloading...."/></p></div>');
             },
             success:  function (response) {
             	            	
@@ -130,7 +132,7 @@ function buscarclientes(nombre){
             url:   'SvCita',
             type:  'POST',
             beforeSend: function () {
-            	$("#clientes").replaceWith('<div id="clientes"><p>Buscando clientes...<img src="IMAGENES/ajaxloader.gif" alt="imagenloading...."/></p></div>');
+            	$("#clientes").replaceWith('<div id="clientes"><p>Buscando clientes...<img src="IMAGENES/ajaxtriangulos.gif"  width="50px" height="50px"  alt="imagenloading...."/></p></div>');
             },
             success:  function (response) {
             	
@@ -182,7 +184,7 @@ function crearcliente(){
             url:   'SvMenu',
             type:  'POST',
             beforeSend: function () {
-            	$("#clientes").replaceWith('<div id="clientes"><p>Buscando clientes...<img src="IMAGENES/ajaxloader.gif" alt="imagenloading...."/></p></div>');
+            	$("#clientes").replaceWith('<div id="clientes"><p>Buscando clientes...<img src="IMAGENES/ajaxtriangulos.gif"  width="50px" height="50px"  alt="imagenloading...."/></p></div>');
             },
             success:  function (response) {
             	
@@ -222,15 +224,16 @@ function altacita(fecha,horario,oid_cliente){
             beforeSend: function () {
             	$("#segundopaso").hide();
             	$("#altacita").hide(); 
-            	
+            	$("#cbhorario").hide();
+            	$("#modalespera").modal('show');
             },
             success:  function (response) {
             	
-            
+            	$("#modalespera").modal('hide');
             	console.log("Si ha sido exito pone un 1"+response);
             	if(response==1)
             		{
-            		$("#resultadomodal").replaceWith('<div id="resultadomodal" class="alert alert-success"><strong>Exito!</strong>Se dio de alta la cita correctamente</div>');		
+            		$("#resultadomodal").replaceWith('<div id="resultadomodal" class="alert alert-success"><strong>Exito! </strong>Se dio de alta la cita correctamente</div>');		
             		}
             	else
             		{
@@ -276,5 +279,33 @@ function irapaginainicio()
 
   </div>
 </div>
+
+<!-- Modal Espera Ajax -->
+<div id="modalespera" class="modal fade" role="dialog" style="margin-top: 30px">
+  <img align="middle" src="IMAGENES/ajaxtriangulos.gif" alt="imagenloading...."/>
+</div>
+
+
 </body>
+
+<style>
+
+<!-- Esto me centra el modal -->
+
+
+@media screen and (min-width: 768px) { 
+  #modalespera:before {
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+
+#modalespera {
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 15%;
+  margin-left: 15%;
+}
+</style>
 </html>

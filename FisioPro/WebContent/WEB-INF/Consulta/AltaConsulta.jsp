@@ -5,7 +5,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>FisioPro - Seleccion Tipo Consulta</title>
-
+<STYLE>
+body
+{
+    background: url('IMAGENES/Fondos/fondoazul1.jpg') fixed;
+    background-size: cover;
+    padding: 0;
+    margin: 0;
+    opacity: 0.8;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+</STYLE>
 </head>
 <body>
 <%@ include file="/WEB-INF/Cabecera.jsp" %>
