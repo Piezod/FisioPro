@@ -8,7 +8,7 @@
 <STYLE>
 body
 {
-    background: url('IMAGENES/Fondos/fondoazul1.jpg') fixed;
+    background: url('IMAGENES/Fondos/fondocita.jpg') fixed;
     background-size: cover;
     padding: 0;
     margin: 0;
@@ -21,8 +21,12 @@ body
 <%@ include file="/WEB-INF/Cabecera.jsp" %>
 
 <div class="container">
+          <div class="panel panel-primary" style="margin-top: 10%">
+            <div class="panel-heading">
 <h1 align="center">Alta Consulta</h1>
+</div>
 	<div class="row">
+	     <div class="panel-body">
 		<div class="col-md-4 col-md-offset-4">
 			<table class="table table-hover thead-light" border="1px">
 				<form action="SvConsulta" method="POST">
@@ -41,6 +45,8 @@ body
 				</div>
 		</div>
 		</form>
+	</div>
+	</div>
 	</div>
 </div>
 </body>

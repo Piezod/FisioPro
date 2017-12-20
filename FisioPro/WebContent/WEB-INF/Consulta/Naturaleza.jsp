@@ -29,11 +29,7 @@ body {
 			<tr><th>Localización</th><td><input class="form-control" type="text" value=" " name="localizacion" id="localizacion"/></td></tr>
 			<tr><th>Irradiacion</th><td><input class="form-control" type="text" value=" "  name="irradiacion" id="irradiacion"/></td></tr>
 			<tr><th>Cambia de lugar</th><td><input class="form-control" type="text"  value=" " name="cambialugar" id="cambialugar"/></td></tr>
-			<tr><th>Relacion con tos</th>
-						<td>
-						<input class="form-control" type="radio" name="rbtos" value="si">Si</input>
-						<input class="form-control" type="radio" name="rbtos" value="no">No</input>
-						</td>						
+			<tr><th>Relacion con tos</th><td><input class="form-control" type="text"  value=" " name="rbtos" id="rbtos"/></td>					
 		</table>
 		</div>
 		<!-- Los Select por otro lado -->
@@ -41,6 +37,7 @@ body {
 			<table class="table table-hover thead-light" border="1px">
 			<tr><th>Cronologia</th>
 				<td><select class="form-control" name="cronologia" id="cronologia">
+						<option value="vacio"></option>
 						<option value="dias">Dias</option>
 						<option value="semanamas">Mas de una semana</option>
 						<option value="menosmes">Menos de un mes</option>
@@ -53,6 +50,7 @@ body {
 				<th>Forma</th>
 				<td>
 					<select class="form-control" name="forma" id="forma">
+						<option value="vacio"></option>
 						<option value="Constante">Constante</option>
 						<option value="Intermitente">Intermitente</option>
 					</select>
@@ -62,6 +60,7 @@ body {
 				<th>Forma de Comienzo</th>
 				<td>
 					<select class="form-control" name="comienzo" id="comienzo">
+						<option value="vacio"></option>
 						<option value="Agudo">Agudo</option>
 						<option value="Insidioso">Insidioso</option>
 					</select>
@@ -70,6 +69,7 @@ body {
 			<tr><th>Impot. Func.</th>
 				<td>
 					<select class="form-control"  name="impotencia" id="impotencia">
+						<option value="vacio"></option>
 						<option value="pequeña">Pequeña</option>
 						<option value="media">Media</option>
 						<option value="grande">Grande</option>
@@ -85,21 +85,12 @@ body {
 		<table class="table table-hover thead-light" border="0px">
 			<tr><th>Hora</th>
 				<td><select class="form-control" name="hora" id="hora" multiple>
+						<option value="vacio"></option>
 						<option value="mañana">Mañana</option>
 						<option value="largodia">A lo largo del dia</option>
 						<option value="fintarde">Final de la tarde</option>
 						<option value="noche">Por la noche</option>
 						<option value="noche">Noche</option>
-					</select>
-				</td>
-			</tr>
-			<tr><th>Factor desencadenate</th>
-				<td><select class="form-control" name="desencadenante" id="desencadenante" multiple>
-						<option value="reposo">Reposo</option>
-						<option value="frio">Frio</option>
-						<option value="calor">Calor</option>
-						<option value="presion">Presion</option>
-						<option value="estres">Estrés</option>
 					</select>
 				</td>
 			</tr>
@@ -116,8 +107,18 @@ body {
 					</select>
 				</td>
 			</tr>
+			<tr><th>Factor desencadenate</th>
+				<td><select class="form-control" name="desencadenante" id="desencadenante" multiple>
+						<option value="reposo">Reposo</option>
+						<option value="frio">Frio</option>
+						<option value="calor">Calor</option>
+						<option value="presion">Presion</option>
+						<option value="estres">Estrés</option>
+					</select>
+				</td>
+			</tr>
 			<tr>
-					<th>Aliviadores</th>
+					<th>FactorAliviadores</th>
 					<td>
 						<select class="form-control" name="aliviadores" id="aliviadores" multiple>
 							<option value="reposo">Reposo</option>
@@ -149,7 +150,15 @@ body {
 </form>
 </div>
 </body>
-
-
+<script>
+$(document).ready(function() {
+	  $(window).keydown(function(event){
+	    if( (event.keyCode == 13)) {
+	      event.preventDefault();
+	      return false;
+	    }
+	  });
+	});
+</script>
 
 </html>

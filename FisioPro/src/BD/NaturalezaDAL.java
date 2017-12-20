@@ -183,5 +183,59 @@ public class NaturalezaDAL {
 		
 		return natu;
 	}
+
+	
+	
+	public NaturalezaDelDolor verfrmdolor(String oid_anamnesis) {
+		c=new Conexion();
+		NaturalezaDelDolor natu=new NaturalezaDelDolor();
+		String query="SELECT `oid_naturaleza`"
+				+ ", `oid_anamnesis`"
+				+ ", `localizacion`"
+				+ ", `cronologia`"
+				+ ", `irradiacion`"
+				+ ", `forma`"
+				+ ", `hora`"
+				+ ", `intensidad`"
+				+ ", `formadecomienzo`"
+				+ ", `tos`"
+				+ ", `desencadenante`"
+				+ ", `aliviadores`"
+				+ ", `impotencia`"
+				+ ", `cambialugar`"
+				+ " FROM `vipr_tnaturaleza`"
+				+ " WHERE oid_anamnesis = "+oid_anamnesis;
+				
+		try {
+			
+			ResultSet rs=c.getstm().executeQuery(query);
+			while (rs.next())
+			{				
+				natu.setLocalizacion(rs.getString(3));
+				natu.setCronologia(rs.getString(4));
+				natu.setIrradiacion(rs.getString(5));
+				natu.setForma(rs.getString(6));
+				natu.setHora(rs.getString(7));
+				natu.setIntensidad(rs.getString(8));
+				natu.setFormaComienzo(rs.getString(9));
+				natu.setRelacionTos(rs.getString(10));
+				natu.setFactoresDesencadenantes(rs.getString(11));
+				natu.setFactoresAliviadores(rs.getString(12));
+				natu.setImpotenciaFuncional(rs.getString(13));
+				natu.setCambiaLugar(rs.getString(14));
+				
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+			System.err.println("error en buscar ClienteDal.RellenarCliente "+ e.getLocalizedMessage() );
+		}
+		finally {
+			c.cerrarConexion();
+		}
+		
+		return natu;
+	}
 	
 }

@@ -47,7 +47,7 @@ public class TratamientoDAL {
 			int insercion = 0;
 			c=new Conexion();
 			String query="insert into vipr_ttratamiento values (?,?)";
-			
+			tra.setTratamiento(tra.getTratamiento().replaceAll("\n","<br />")); 
 			try {
 				PreparedStatement psResulset = c.getConexion().prepareStatement(query);
 				psResulset.setInt(1,0); // Este campo es autoincremental en la bd
