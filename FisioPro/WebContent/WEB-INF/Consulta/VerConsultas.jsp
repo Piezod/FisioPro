@@ -11,11 +11,12 @@
 <STYLE>
 body
 {
-    background: url('IMAGENES/Fondos/fondoazul1.jpg') fixed;
+    background: url('IMAGENES/Fondos/mantipyng.jpg') fixed;
     background-size: cover;
     padding: 0;
     margin: 0;
-    opacity: 0.8;
+    opacity: 0.95;
+    height:100px;
     filter: alpha(opacity=50); /* For IE8 and earlier */
 }
 </STYLE>
@@ -23,37 +24,43 @@ body
 <body>
 
 <div class="container">
+<div style="margin-top: 10%"  class="col-md-6 col-md-offset-3 col-xs-6 col-xs-offset-3">
+  <div class="panel panel-info">
+	  <div class="panel-heading">
+		<h1 align="center" style="width: 80%;">Ver Consultas , seleccione un cliente</h1>
+	  </div>
+	   <div class="panel-body">
+			<div class="row" >
 
-<h1 style="margin-top: 25%" align="center">Ver Consultas , seleccione un cliente</h1>
-<div class="row" >
-		<div class="col-md-6 col-md-offset-2 col-xs-12">
-		<table>
-			<form method="post" action="SvVerConsultas">
-				<tr>
-					<th>Seleccione un cliente:</th>
-					<td>
-						<select name="oid_cliente">
-							<c:forEach var="item"  items="${listacliente}" varStatus="loop">
-									<option  value="${item.oid}">										
-										<c:out value="${item.nombre}"></c:out>
-										<c:out value="${item.apellido1}"></c:out>
-										<c:out value="${item.apellido2}"></c:out>							
-									</option>							
-							</c:forEach>
-						</select>
-					</td>
-				</tr>		
-				<tr>	
-					<td>					
-						<button class="btn btn-primary" type="submit" id="enviar" name="enviar"> Buscar</button>						
-					</td>
-				</tr>
-				<input type="hidden" name="oper" value="detalleconsulta"/>
-			</form>
-		</table>
-	</div>
+					<table align="center">
+						<form method="post" action="SvVerConsultas">
+							<tr>
+								<th>Seleccione un cliente:</th>
+								<td>
+									<select name="oid_cliente" style="width: 80%;">
+										<c:forEach var="item"  items="${listacliente}" varStatus="loop">
+												<option  value="${item.oid}">										
+													<c:out value="${item.nombre}"></c:out>
+													<c:out value="${item.apellido1}"></c:out>
+													<c:out value="${item.apellido2}"></c:out>							
+												</option>							
+										</c:forEach>
+									</select>
+								</td>
+							</tr>		
+							<tr>	
+								<td colspan="2" align="center">					
+									<button class="btn btn-primary" type="submit" id="enviar" name="enviar" style="margin-top: 5px;"> Buscar</button>						
+								</td>
+							</tr>
+							<input type="hidden" name="oper" value="detalleconsulta"/>
+						</form>
+					</table>
+
+			</div>
+	  </div>
+  </div>
 </div>
-
 </body>
 
 </html>

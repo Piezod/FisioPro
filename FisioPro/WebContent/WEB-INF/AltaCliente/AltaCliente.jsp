@@ -74,7 +74,7 @@ function altacliente(nombre,ape1,ape2,edad,tlfn,oper){
 					 id="btnaltausuario">Alta</button>
 				</div>	 -->
 				<div class="col-md-4 col-md-offset-4">
-					<input type="submit" class="btn btn-default" id="altacliente" name="Alta cliente"></input>
+					<input type="submit" class="btn btn-primary" id="altacliente" name="Alta cliente"></input>
 				</div>
 			</div>
 			 </div>
@@ -98,10 +98,36 @@ function altacliente(nombre,ape1,ape2,edad,tlfn,oper){
         <div id="cuerpomodal"></div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
+
+<!-- Modal Espera Ajax -->
+<div id="modalespera" class="modal fade" role="dialog" style="margin-top: 30px">
+  <img align="middle" src="IMAGENES/ajaxtriangulos.gif" alt="imagenloading...."/>
+</div>
+
+<style>
+
+<!-- Esto me centra el modal -->
+
+
+@media screen and (min-width: 768px) { 
+  #modalespera:before {
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+
+#modalespera {
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 15%;
+  margin-left: 15%;
+}
+</style>
 
 </html>

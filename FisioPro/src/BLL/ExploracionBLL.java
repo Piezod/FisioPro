@@ -22,6 +22,14 @@ public class ExploracionBLL {
 	
 	public int AltaExploracion()
 	{
+		/*
+		 * Modificamos los campos para que guarde el salto de linea para visualizarlo bien en html
+		 */
+		exp.setInspeccionVisual(exp.getInspeccionVisual().replaceAll("\n","<br />")); 
+		exp.setPalpación(exp.getPalpación().replaceAll("\n","<br />")); 
+		exp.setTestDeMovilidad(exp.getTestDeMovilidad().replaceAll("\n","<br />")); 
+		exp.setTestOrtopedico(exp.getTestOrtopedico().replaceAll("\n","<br />"));
+		
 		ExploracionDAL traDAL=new ExploracionDAL(exp);
 		return traDAL.AltaExploracion();
 	}

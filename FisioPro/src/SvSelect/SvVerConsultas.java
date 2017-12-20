@@ -12,18 +12,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 
 import BD.TratamientoDAL;
 import BLL.AnamnesisBLL;
 import BLL.ClienteBLL;
 import BLL.ConsultaBLL;
 import BLL.ExploracionBLL;
+import BLL.NaturalezaBLL;
 import BLL.TratamientoBLL;
 import Entidades.Anamnesis;
 import Entidades.Cliente;
 import Entidades.Consulta;
 import Entidades.DetalleConsulta;
 import Entidades.Exploracion;
+import Entidades.NaturalezaDelDolor;
 import Entidades.PreVerDetalleConsulta;
 import Entidades.Tratamiento;
 import Sv.SvBase;
@@ -64,6 +67,14 @@ public class SvVerConsultas extends SvBase {
 			    response.setCharacterEncoding("UTF-8");
 			    System.out.println("Devolviendo el objeto a json"+json);
 			    response.getWriter().write(json);
+		}else if ( OPERACION.equalsIgnoreCase("abrirdolor"))
+		{		
+			   String json = new Gson().toJson(verfrmdolor(request.getParameter("oid_anamnesis")));
+			    response.setContentType("application/json");
+			    response.setCharacterEncoding("UTF-8");
+			    System.out.println("Devolviendo el dolor a json"+json);
+			    response.getWriter().write(json);
+			System.out.println("abriendo dolor");
 		}
 		else if ( OPERACION.equalsIgnoreCase("abrirexploracion"))
 		{		
@@ -79,13 +90,22 @@ public class SvVerConsultas extends SvBase {
 			    response.setCharacterEncoding("UTF-8");
 			    System.out.println("Devolviendo el objeto a json"+json);
 			    response.getWriter().write(json);
-		}else
+		}
+		
+		else
 		{
 			System.out.println("no existe ese jsp");
 			request.getRequestDispatcher("inicio.jsp").forward(request,response);
 		}
 	}
 	
+	private NaturalezaDelDolor verfrmdolor(String oid_anamnesis) {
+				NaturalezaBLL natubll=new NaturalezaBLL();
+		return		natubll.verfmdolor(oid_anamnesis);
+				
+		
+	}
+
 	/**
 	 * Metodo para rellenar una lista que devuelva TODOS los clientes.
 	 * 

@@ -8,6 +8,17 @@
 <link rel="stylesheet" href="css/Perfil.css" type="text/css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <style type="text/css">
+
+body
+{
+    background: url('IMAGENES/Fondos/fondoprofile.jpg') fixed;
+    background-size: cover;
+    padding: 0;
+    margin: 0;
+    opacity: 0.95;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+
 #guardarpefil
 {
 	display:none;
@@ -26,12 +37,12 @@
       <!-- 
       <!-- <jsp:useBean id="now" class="java.util.Date" /> -->
      
-<p class=" text-info">La fecha de hoy es : <fmt:formatDate pattern = "dd-MM-yyyy" 
-         value = "${now}" /></p>
+<h4 class=" text-danger">La fecha de hoy es : <fmt:formatDate pattern = "dd-MM-yyyy" 
+         value = "${now}" /></h4>
       </div>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
    
-          <div class="panel panel-info">
+          <div class="panel panel-info" style="margin-top: 10%">
             <div class="panel-heading">
               <h3 class="panel-title">Datos del Cliente</h3>
             </div>
@@ -70,19 +81,19 @@
                       </tr>
                       <tr>
                         <td>Enfermedades Graves</td>
-                        <td><input class="form-control" type="text" value="${antecedentes.enfermedadesGraves}" name="eg" id="eg" readonly /></td>
+                        <td><textarea class="form-control" type="text" value="${antecedentes.enfermedadesGraves}" name="eg" id="eg" readonly >${antecedentes.enfermedadesGraves}</textarea></td>
                       </tr>
                       <tr>
                         <td>Operaciones Quirurjicas</td>
-                       	<td> <input class="form-control" type="text" value="${antecedentes.operacionesQuirurjicas}" name="oq" id="oq" readonly /></td>
+                       	<td> <textarea class="form-control" type="text" value="${antecedentes.operacionesQuirurjicas}" name="oq" id="oq" readonly >${antecedentes.operacionesQuirurjicas}</textarea></td>
                        </tr>
                        <tr>
                         <td>Tratamiento Medico</td>
-                       	<td><input class="form-control" type="text" value=" ${antecedentes.tratamientoMedicoActual}" name="tm" id="tm" readonly /></td>
+                       	<td><textarea class="form-control" type="text" value=" ${antecedentes.tratamientoMedicoActual}" name="tm" id="tm" readonly >${antecedentes.tratamientoMedicoActual}</textarea></td>
                        </tr>
                        <tr>
                         <td>Lesiones Antiguas</td>
-                        <td><input class="form-control" type="text" value="${antecedentes.lesionesAntiguas}" name="la" id="la" readonly /></td>                    
+                        <td><textarea class="form-control" type="text" value="${antecedentes.lesionesAntiguas}" name="la" id="la" readonly >${antecedentes.lesionesAntiguas}</textarea></td>                    
                        </tr>
                     </tbody>
                  
@@ -116,8 +127,8 @@ $(document).ready(function(){
 	console.log("Listo!");
     $("#editarperfil").click(function(){
         console.log("quitar remove only");
-    	$("input").removeAttr("readonly");
-    	$("input").css('background-color','#FC0');
+    	$("input,textarea").removeAttr("readonly");
+    	$("input,textarea").css('background-color','#FC0');
     	$("#editarperfil").hide();
     	$("#guardarpefil").show();
     });
@@ -168,14 +179,14 @@ $(document).ready(function(){
                 type:  'POST',
                 beforeSend: function () {
                 	
-                	$("#ajaxmodal").modal('show');
+                	$("#modalespera").modal('show');
                 },
                 success:  function (response) {
-                	$("#ajaxmodal").modal('hide');
+                	$("#modalespera").modal('hide');
                 	console.log(response);
                     console.log("poner el readonly");
-                	$('input').prop('readonly', true);
-                	$("input").css('background-color','#F0FFFF');
+                	$('input,textarea').prop('readonly', true);
+                	$("input,textarea").css('background-color','#F0FFFF');
                 }
         });
     };
@@ -183,27 +194,31 @@ $(document).ready(function(){
 
 </script>
 
-
-<!-- Modal -->
-<div id="ajaxmodal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
-      </div>
-      <div class="modal-body">
-        <div class="label label-default"></div><p>Realizando la actualizacion...</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
+<!-- Modal Espera Ajax -->
+<div id="modalespera" class="modal fade" role="dialog" style="margin-top: 30px">
+  <img align="middle" src="IMAGENES/ajaxtriangulos.gif" alt="imagenloading...."/>
 </div>
+
+<style>
+
+<!-- Esto me centra el modal -->
+
+
+@media screen and (min-width: 768px) { 
+  #modalespera:before {
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+
+#modalespera {
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 15%;
+  margin-left: 15%;
+}
+</style>
 
 <!-- Modal Confirmar baja-->
 <div id="confirmarbaja" class="modal fade" role="dialog">
