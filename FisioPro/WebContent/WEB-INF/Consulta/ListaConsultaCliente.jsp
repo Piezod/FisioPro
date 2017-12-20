@@ -7,11 +7,11 @@
 <STYLE>
 body
 {
-    background: url('IMAGENES/Fondos/fondoazul1.jpg') fixed;
+    background: url('IMAGENES/Fondos/altacliente.jpg') fixed;
     background-size: cover;
     padding: 0;
     margin: 0;
-    opacity: 0.8;
+    opacity: 0.95;
     filter: alpha(opacity=50); /* For IE8 and earlier */
 }
 </STYLE>
@@ -58,8 +58,11 @@ $(document).ready( function() {
 <body>
 
 <div class="container">
-
-<h1 align="center">Consulta Clientes</h1>
+<div align="center"  class="panel panel-primary">
+ <div class="panel-heading">
+	<h1 align="center">Consulta Clientes</h1>
+ </div>
+  <div style=" text-align: center;"  class="panel-body">
 <c:if test="${!mostrarconsulta}">
 <div class="row">
 		<div class="col-md-4 col-md-offset-4">
@@ -80,42 +83,45 @@ $(document).ready( function() {
 </c:if>
 
 <div class="col-md-4 col-md-offset-4">
-					  <table class="table table-hover">
-		  	<tr>
-		  		<th></th>
-		  		<th> Nombre</th>
-		  		<th> Apellido1 </th>
-		  		<th> Apellido2</th>
-		  		<th> Edad </th>
-		  		<th> Telefono </th>
-		  	</tr>
-<c:forEach var="item"  items="${listacliente}" varStatus="loop">
-
-			<tr onClick="$(this).MessageBox('${item.oid}');"> 
-				
-				<td><a href="SvConsultaCliente?oper=perfil&oid=${item.oid}">
-					<span class="glyphicon glyphicon-eye-open"></span>
-				</a></td>
-				<td><c:out value = "${item.nombre}"/></td>
-				<td><c:out value = "${item.apellido1}"/></td>
-				<td><c:out value = "${item.apellido2}"/></td>
-				<td><c:out value = "${item.edad}"/></td>
-				<td><c:out value = "${item.telefono}"/></td>
-			</tr>
-</c:forEach>
-</table>
-
-<p>Se han encontrado ${NumeroMaximoRegistros} coincidencias.</p> 
-
-
-<ul class="pagination">
-
-<li><a href="SvConsultaCliente?oper=consulta&name=${name}&NumeroPulsado=0">Primera</a></li>
-<c:forEach begin="0" end="${NumeroPaginaciones}" varStatus="loop">
-		  <li><a href="SvConsultaCliente?oper=consulta&name=${name}&NumeroPulsado=${loop.index}">${loop.index}</a></li>
-</c:forEach>
-<li><a href="SvConsultaCliente?oper=consulta&name=${name}&NumeroPulsado=${NumeroPaginaciones}">Ultima</a></li>
-</ul>
+	 <table class="table table-hover">
+			  	<tr>
+			  		<th></th>
+			  		<th> Nombre</th>
+			  		<th> Apellido1 </th>
+			  		<th> Apellido2</th>
+			  		<th> Edad </th>
+			  		<th> Telefono </th>
+			  	</tr>
+	<c:forEach var="item"  items="${listacliente}" varStatus="loop">
+	
+				<tr onClick="$(this).MessageBox('${item.oid}');"> 
+					
+					<td><a href="SvConsultaCliente?oper=perfil&oid=${item.oid}">
+						<span class="glyphicon glyphicon-eye-open"></span>
+					</a></td>
+					<td><c:out value = "${item.nombre}"/></td>
+					<td><c:out value = "${item.apellido1}"/></td>
+					<td><c:out value = "${item.apellido2}"/></td>
+					<td><c:out value = "${item.edad}"/></td>
+					<td><c:out value = "${item.telefono}"/></td>
+				</tr>
+	</c:forEach>
+	</table>
+</div>
+<div align="center" class="panel-footer">	
+	<p>Se han encontrado ${NumeroMaximoRegistros} coincidencias.</p> 
+	
+	
+	<ul class="pagination">
+	
+	<li><a href="SvConsultaCliente?oper=consulta&name=${name}&NumeroPulsado=0">Primera</a></li>
+	<c:forEach begin="0" end="${NumeroPaginaciones}" varStatus="loop">
+			  <li><a href="SvConsultaCliente?oper=consulta&name=${name}&NumeroPulsado=${loop.index}">${loop.index}</a></li>
+	</c:forEach>
+	<li><a href="SvConsultaCliente?oper=consulta&name=${name}&NumeroPulsado=${NumeroPaginaciones}">Ultima</a></li>
+	</ul>
+</div>
+</div>
 </body>
 
 </html>

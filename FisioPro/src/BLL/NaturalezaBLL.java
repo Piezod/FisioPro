@@ -4,6 +4,8 @@ import java.sql.SQLException;
 
 import javax.rmi.CORBA.Util;
 
+import com.google.gson.JsonElement;
+
 import BD.NaturalezaDAL;
 import Entidades.Anamnesis;
 import Entidades.Cliente;
@@ -88,6 +90,12 @@ public class NaturalezaBLL {
 		}
 		
 		
+	}
+
+
+	public NaturalezaDelDolor verfmdolor(String oid_anamnesis) {
+		NaturalezaDAL natudal=new NaturalezaDAL();
+		return natudal.verfrmdolor(oid_anamnesis);
 	}
 
 }

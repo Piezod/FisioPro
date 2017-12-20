@@ -35,6 +35,14 @@ public class AnamnesisBLL {
 	
 	public int altaanamnesisBLL(String oid_cliente)
 	{
+		/*
+		 * Modificamos los campos para que guarde el salto de linea para visualizarlo bien en html
+		 
+		
+		an.setAqueloatribuye(an.getAqueloatribuye().replaceAll("\n","<br />")); 
+		an.setDesdecuando(an.getDesdecuando().replaceAll("\n","<br />")); 
+		an.setQuelepasa(an.getQuelepasa().replaceAll("\n","<br />")); */
+		
 		Cliente cli=new Cliente();
 		cli.setOid(Integer.parseInt(oid_cliente));
 		forzarvacios();

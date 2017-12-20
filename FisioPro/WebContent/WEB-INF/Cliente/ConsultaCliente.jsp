@@ -5,15 +5,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>FisioPro - Buscar Cliente</title>
 <STYLE>
 body
 {
-    background: url('IMAGENES/Fondos/fondoazul1.jpg') fixed;
+    background: url('IMAGENES/Fondos/mantipyng.jpg') fixed;
     background-size: cover;
     padding: 0;
     margin: 0;
-    opacity: 0.8;
+    opacity:0.95;
     filter: alpha(opacity=50); /* For IE8 and earlier */
 }
 </STYLE>
@@ -23,24 +23,31 @@ body
 </head>
 <body>
 <%@ include file="/WEB-INF/Cabecera.jsp" %>
-<div class="container">
-<h1 align="center">Consulta Clientes</h1>
-	<div class="row">
-		<div class="col-md-4 col-md-offset-4">
-		<table>
-			<form method="post" action="SvConsultaCliente">
-				<tr><th>Nombre de cliente</th></tr>
-				<tr><td><input type="text" class="form-control" name="name" id="name" placeholder="Introduzca nombre"></td></tr>
-				<input type="hidden" name="oper" value="consulta">
-				<tr>
-					<td>
-							<input class="btn btn-primary" type="submit" id="enviar" name="enviar"/>
-					</td>
-				</tr>
-			</form>
-		</table>
+<div class="container" style="margin-top: 12%;">
+	<div class="col-md-8 col-md-offset-2">
+	<div align="center"  class="panel panel-primary">
+		 <div class="panel-heading">
+			<h1 align="center">Consulta Clientes</h1>
+		 </div>				
+		 <div style=" text-align: center;"  class="panel-body">
+		 	<div class="col-md-8 col-md-offset-2">
+					<table>
+						<form method="post" action="SvConsultaCliente">
+							<tr><th>Nombre de cliente</th></tr>
+							<tr><td><input type="text" class="form-control" name="name" id="name" placeholder="Introduzca nombre"></td></tr>
+							<input type="hidden" name="oper" value="consulta"/>
+					</table>
+			</div>
+		</div>
+		<div align="center" class="panel-footer">	
+				
+						<input align="center" class="btn btn-primary" type="submit" id="enviar" name="enviar"/>					
+			</div>
+		</div>
 	</div>
 </div>
+</div>
+	</form>
 </body>
 
 <!-- Modal -->

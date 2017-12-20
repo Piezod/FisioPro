@@ -22,6 +22,7 @@ public class TratamientoBLL {
 	public int AltaTratamiento()
 	{
 		TratamientoDAL traDAL=new TratamientoDAL(tra);
+		
 		return traDAL.AltaExploracion();
 	}
 	
